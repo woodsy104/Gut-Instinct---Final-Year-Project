@@ -8,34 +8,5 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=32}"/>
     </ContentPage.ToolbarItems>
-    <maps:Map x:Name="map">
-        <x:Arguments>
-            <MapSpan>
-                <x:Arguments>
-                    <sensors:Location>
-                        <x:Arguments>
-                            <x:Double>52.66482630113309</x:Double>
-                            <x:Double>-8.625857537927548</x:Double>
-                        </x:Arguments>
-                    </sensors:Location>
-                    <x:Double>0.01</x:Double>
-                    <x:Double>0.01</x:Double>
-                </x:Arguments>
-            </MapSpan>
-        </x:Arguments>
-        <maps:Map.Pins>
-            <maps:Pin Label="Santa Cruz"
-                      Address="The city with a boardwalk"
-                      Type="Place">
-                <maps:Pin.Location>
-                    <sensors:Location>
-                        <x:Arguments>
-                            <x:Double>52.66482630113309</x:Double>
-                            <x:Double>-8.625857537927548</x:Double>
-                        </x:Arguments>
-                    </sensors:Location>
-                </maps:Pin.Location>
-            </maps:Pin>
-        </maps:Map.Pins>
-    </maps:Map>
+    <maps:Map x:Name="map"/>
 </ContentPage>
