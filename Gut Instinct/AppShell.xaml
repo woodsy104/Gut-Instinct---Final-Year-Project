@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Gut_Instinct.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Gut_Instinct.Views">
+
+
+    <FlyoutItem Title="Toilet Map"
+                Icon="{OnPlatform 'icon_toilet.png', iOS='icon_toilet_ios.png', MacCatalyst='icon_toilet_ios.png'}">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:MapPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Notes"
+                Icon="{OnPlatform 'icon_notes.png', iOS='icon_notes_ios.png', MacCatalyst='icon_notes_ios.png'}">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:AllNotesPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="Food Library"
+                 Icon="{OnPlatform 'icon_food.png', iOS='icon_food_ios.png', MacCatalyst='icon_food_ios.png'}">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:AllFoodsPage}"/>
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem Title="About"
+                Icon="{OnPlatform 'icon_about.png', iOS='icon_about_ios.png', MacCatalyst='icon_about_ios.png'}">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:AboutPage}"/>
+        </Tab>
+    </FlyoutItem>
+</Shell>

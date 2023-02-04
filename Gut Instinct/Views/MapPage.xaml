@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             x:Class="Gut_Instinct.Views.MapPage"
+             Title="Toilet Map">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=32}"/>
+    </ContentPage.ToolbarItems>
+    <maps:Map x:Name="map">
+        <x:Arguments>
+            <MapSpan>
+                <x:Arguments>
+                    <sensors:Location>
+                        <x:Arguments>
+                            <x:Double>52.66482630113309</x:Double>
+                            <x:Double>-8.625857537927548</x:Double>
+                        </x:Arguments>
+                    </sensors:Location>
+                    <x:Double>0.01</x:Double>
+                    <x:Double>0.01</x:Double>
+                </x:Arguments>
+            </MapSpan>
+        </x:Arguments>
+        <maps:Map.Pins>
+            <maps:Pin Label="Santa Cruz"
+                      Address="The city with a boardwalk"
+                      Type="Place">
+                <maps:Pin.Location>
+                    <sensors:Location>
+                        <x:Arguments>
+                            <x:Double>52.66482630113309</x:Double>
+                            <x:Double>-8.625857537927548</x:Double>
+                        </x:Arguments>
+                    </sensors:Location>
+                </maps:Pin.Location>
+            </maps:Pin>
+        </maps:Map.Pins>
+    </maps:Map>
+</ContentPage>
