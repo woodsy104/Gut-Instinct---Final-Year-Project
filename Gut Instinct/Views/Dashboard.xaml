@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gut_Instinct.Models"
+             x:DataType="vm:DashboardVM"
+             x:Name="dashhome"
+             x:Class="Gut_Instinct.Views.Dashboard">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="30,20" Spacing="20" VerticalOptions="Center" Margin="0, 10, 0, 0">
+                
+                <Grid ColumnDefinitions="*, 100">
+                    <Frame Padding="10, 5" Grid.Column="0" Margin="0, 0, 10, 0">
+                        <Entry Placeholder="Enter Appointment" Text="{Binding AppEntryText}" TextColor="Grey"/>
+                    </Frame>
+                    <Button Text="Add" Command="{Binding AddAppointmentCommand}" Grid.Column="1" TextColor="MediumPurple" BackgroundColor="#efd9fd" IsEnabled="{Binding IsNotBusy}"/>
+                </Grid>
+                <VerticalStackLayout>
+                    <RefreshView Command="{Binding GetAppointmentsCommand}" IsRefreshing="{Binding IsRefreshing}">
+                        <CollectionView ItemsSource="{Binding AppointmentList}">
+                            <CollectionView.EmptyView>
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding EmptyText}" FontSize="Medium" TextColor="Grey"/>
+                                </VerticalStackLayout>
+                                
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:Appointment">
+                                    <Frame Padding="15, 10" Margin="0, 0, 0, 17" BackgroundColor="#efd9fd">
+                                        <Grid ColumnDefinitions="*, auto, auto">
+                                            <HorizontalStackLayout>
+                                                <CheckBox IsChecked="{Binding Completed}">
+                                                    <CheckBox.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.CheckAppointmentCommand, Source= {x:Reference Name = dashhome}}"
+                                                                              CommandParameter="{Binding .}"/>
+                                                    </CheckBox.GestureRecognizers>
+                                                </CheckBox>
+                                                <Label WidthRequest="150" LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Medium" Grid.Column="1" VerticalOptions="Center" TextColor="#efd9fd">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.CheckAppointmentCommand, Source= {x:Reference Name=dashhome}}"
+                                                                              CommandParameter="{Binding .}"/>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+                                            </HorizontalStackLayout>
+                                            <Button Grid.Column="1" Text="Edit" IsEnabled="{Binding Path=BindingContext.IsNotBusy, Source={x:Reference Name=dashhome}}" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DashboardVM}}, Path=EditAppointmentCommand}"
+                                                    CommandParameter="{Binding .}" Margin="0, 10, 10, 10"
+                                                    VerticalOptions="Center"/>
+                                            <Button Grid.Column="2" Text="Delete" BackgroundColor="AliceBlue" IsEnabled="{Binding Path=BindingContext.IsNotBusy, Source={x:Reference Name=dashhome}}" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DashboardVM}}, Path=DeleteTaskCommand}"
+                                                    CommandParameter="{Binding .}" Margin="0, 10"
+                                                    VerticalOptions="Center"/>
+                                        </Grid>
+                                        
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </RefreshView>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -5,7 +5,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:Gut_Instinct.Views">
 
+  
+        
+    <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" Route="Login"/>
 
+    <FlyoutItem Title="Toilet Map"
+                Icon="{OnPlatform 'icon_toilet.png', iOS='icon_toilet_ios.png', MacCatalyst='icon_toilet_ios.png'}">
+        <Tab>
+            <ShellContent ContentTemplate="{DataTemplate views:Dashboard}" Route="Main"/>
+        </Tab>
+    </FlyoutItem>
     <FlyoutItem Title="Toilet Map"
                 Icon="{OnPlatform 'icon_toilet.png', iOS='icon_toilet_ios.png', MacCatalyst='icon_toilet_ios.png'}">
         <Tab>
