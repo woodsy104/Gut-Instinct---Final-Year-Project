@@ -10,7 +10,7 @@ public partial class Dashboard : ContentPage
 	{
 		InitializeComponent();
 		vm = new DashboardVM();
-		BindingContext= vm;
+		BindingContext = vm;
 	}
 
     protected override async void OnAppearing()
