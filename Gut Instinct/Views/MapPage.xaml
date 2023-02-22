@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
+             xmlns:vm="clr-namespace:Gut_Instinct.Models"
+             x:DataType="vm:MapVM"
              x:Class="Gut_Instinct.Views.MapPage"
              Title="Toilet Map">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=32}"/>
     </ContentPage.ToolbarItems>
-    <maps:Map x:Name="map"/>
+    <Grid>
+        
+    </Grid>
 </ContentPage>

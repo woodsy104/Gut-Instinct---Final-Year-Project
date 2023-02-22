@@ -1,14 +1,19 @@
+using Gut_Instinct.Models;
+
 namespace Gut_Instinct.Views;
 
 public partial class PinPage : ContentPage
 {
+    PinVM vm;
 	public PinPage()
 	{
 		InitializeComponent();
+        vm = new PinVM();
+        BindingContext = vm;
 	}
 
-    private void Submit_Clicked(object sender, EventArgs e)
+    protected override async void OnAppearing()
     {
-
+        await vm.InitialiseRealm();
     }
 }

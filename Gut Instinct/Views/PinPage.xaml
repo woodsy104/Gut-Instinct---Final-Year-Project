@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gut_Instinct.Models"
+             x:DataType="vm:PinVM"
              x:Class="Gut_Instinct.Views.PinPage"
              Title="Add a Toilet">
     <VerticalStackLayout Spacing="10" Margin="5">
         <Label Text="Place holder for the heading of this page"/>
-        <Editor x:Name="LocationNameEditor"
-                Placeholder="Enter the Toilet Location Name:"
+        <Entry Placeholder="Enter the Toilet Location Name:" Text="{Binding Address}"
                 HeightRequest="100"/>
-        <Editor x:Name="EircodeEditor"
-                Placeholder="Enter eircode or address of toilet:"
+        <Entry  Placeholder="Toilet Cost?" Text="{Binding IsFree}"
                 HeightRequest="100"/>
-        <Editor x:Name="CoordinatesEditor"
-                Placeholder="If possible enter the toilet coordinates here:"
+        <Entry  Placeholder="Enter you star rating" Text="{Binding Stars}"
                 HeightRequest="100"/>
-        <Button Text="Submit"
-                Clicked="Submit_Clicked"/>
+        <Button Text="Submit pin"
+                Command="{Binding AddPinCommand}"/>
     </VerticalStackLayout>
 </ContentPage>
