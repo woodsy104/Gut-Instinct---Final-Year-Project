@@ -9,22 +9,27 @@ using MongoDB.Bson;
 
 namespace Gut_Instinct.Models
 {
-    class Pin
+    public class Pin : RealmObject
     {
-        //[PrimaryKey]
-        //[MapTo("_address")]
-        //[Required]
+        [PrimaryKey]
+        [MapTo("_id")]
+        public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
+
+        [MapTo("owner")]
+        public string Owner { get; set; }
+
+        [MapTo("address")]
+        [Required]
         public string Address { get; set; }
 
-        //[MapTo("_name")]
-        //[Required]
-        public string Name { get; set; }
+        [MapTo("free")]
+        public bool Free { get; set; }
 
-        //[MapTo("_location")]
-        //public ObservableCollection<double> Location { get; set; }
+        [MapTo("stars")]
+        public int Stars { get; set; }
 
-        //[MapTo("_type")]
-        public string type { get; set; }
-
+        [MapTo("_partition")]
+        [Required]
+        public string Partition { get; set; }
     }
 }
