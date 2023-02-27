@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using Realms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +8,22 @@ using System.Threading.Tasks;
 
 namespace Gut_Instinct.Models
 {
-    internal class Food
+    public class Food : RealmObject
     {
-        public string Filename { get; set; }
-        public string Name { get; set; }
-        public string Text { get; set; }
-        public DateTime Date { get; set; }
-    }
+        [PrimaryKey]
+        [MapTo("_id")]
+        public ObjectId Id { get; set;} = ObjectId.GenerateNewId();
+
+        [MapTo ("owner")]
+        public string Owner { get; set;}
+
+        [MapTo("foodname")]
+        public string FoodName { get; set;}
+
+        [MapTo("description")]
+        public string Description { get; set;}
+
+        [MapTo("colour")]
+        public string Colour { get; set;}
+    }       
 }

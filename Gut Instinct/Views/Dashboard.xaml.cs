@@ -16,5 +16,6 @@ public partial class Dashboard : ContentPage
     protected override async void OnAppearing()
     {
 		await vm.InitialiseRealm();
+		vm.GetAppointments();
     }
 }
