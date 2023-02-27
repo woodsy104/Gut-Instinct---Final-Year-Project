@@ -1,71 +1,37 @@
-namespace Gut_Instinct.Views;
+using Gut_Instinct.Models;
+using System.Drawing;
+using Realms;
 
-[QueryProperty(nameof(ItemId), nameof(ItemId))]
+namespace Gut_Instinct.Views;
 
 public partial class FoodPage : ContentPage
 {
-    public FoodPage()
-    {
+    FoodVM vm;
+
+    public FoodPage() { 
         InitializeComponent();
-
-        string appDataPath = FileSystem.AppDataDirectory;
-        string randomFileName = $"{Path.GetRandomFileName()}.foods.txt";
-
-        LoadFood(Path.Combine(appDataPath, randomFileName));
+        vm = new FoodVM();
+        BindingContext= vm;
     }
 
-    private async void SaveButton_Clicked(object sender, EventArgs e)
+
+    protected override async void OnAppearing()
     {
-        if (BindingContext is Models.Food food)
-        {
-            File.WriteAllText(food.Filename, TextEditor.Text);
-            await Shell.Current.GoToAsync("..");
-        }
+        await vm.InitialiseRealm();
     }
 
-    private async void DeleteButton_Clicked(object sender, EventArgs e)
+    private void Red_Button_Clicked(object sender, EventArgs e)
     {
-        if (BindingContext is Models.Food food)
-        {
-            // Delete the file.
-            if (File.Exists(food.Filename))
-                File.Delete(food.Filename);
-        }
-
-        await Shell.Current.GoToAsync("..");
+        colourpick.Text = "Red";
     }
 
-    private void LoadFood(string fileName)
+    private void Orange_Button_Clicked(object sender, EventArgs e)
     {
-        Models.Food foodModel = new Models.Food();
-        foodModel.Filename = fileName;
-
-        if (File.Exists(fileName))
-        {
-            foodModel.Date = File.GetCreationTime(fileName);
-            foodModel.Text = File.ReadAllText(fileName);
-            foodModel.Name = File.ReadAllLines(fileName)[0];
-        }
-        BindingContext = foodModel;
+        colourpick.Text = "DarkOrange";
     }
 
-    public string ItemId
+    private void Green_Button_Clicked(object sender, EventArgs e)
     {
-        set { LoadFood(value); }
-    }
-
-    private void GreenButton_Clicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void OrangeButton_Clicked(object sender, EventArgs e)
-    {
-
-    }
-
-    private void RedButton_Clicked(object sender, EventArgs e)
-    {
-
+        colourpick.Text = "Green";
     }
 }

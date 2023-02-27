@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gut_Instinct.Models"
+             xmlns:y="clr-namespace:Gut_Instinct.Helpers"
+             x:DataType="vm:FoodVM"
+             x:Name="foodlib"
              x:Class="Gut_Instinct.Views.AllFoodsPage">
+    <ContentPage.Resources>
+        <y:ColourConverter x:Key="ColourConverter"/>
+    </ContentPage.Resources>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
     </ContentPage.ToolbarItems>
 
-    <!-- Display notes in a list -->
-    <CollectionView x:Name="foodCollection"
-                        ItemsSource="{Binding Foods}"
-                        Margin="20"
-                        SelectionMode="Single"
-                        SelectionChanged="foodCollection_SelectionChanged">
-
-        <!-- Designate how the collection of items are laid out -->
+    <CollectionView x:Name="foodLibrary" ItemsSource="{Binding FoodLibrary}"  SelectionMode="Single" SelectionChanged="foodCollection_SelectionChanged">
         <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
-        </CollectionView.ItemsLayout>
-
-        <!-- Define the appearance of each item in the list -->
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>
-                    <Label Text="{Binding Name}" FontSize="22" TextTransform="Uppercase"/>
-                    <Label Text="{Binding Date}" FontSize="14" TextColor="Silver"/>
-                </StackLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:Food">
+                <Grid ColumnDefinitions="*, auto, auto">
+                    <HorizontalStackLayout>
+                        <Label  WidthRequest="1000" VerticalOptions="Center" Grid.Column="1" LineBreakMode="WordWrap" Text="{Binding FoodName}" FontSize="22" BackgroundColor="{Binding Colour, Converter={StaticResource ColourConverter}, ConverterParameter=AnyStringHere}"/>
+                    </HorizontalStackLayout>
+                    <ImageButton Grid.Column="1" Source="edit" Command="{Binding Path=BindingContext.EditFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}"/>
+                    <ImageButton Grid.Column="2" Source="delete" Command="{Binding Path=BindingContext.DeleteFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}"/>
+                </Grid>
             </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 </ContentPage>

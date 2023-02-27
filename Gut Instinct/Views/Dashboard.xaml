@@ -38,7 +38,7 @@
                                                                               CommandParameter="{Binding .}"/>
                                                     </CheckBox.GestureRecognizers>
                                                 </CheckBox>
-                                                <Label WidthRequest="150" LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Medium" Grid.Column="1" VerticalOptions="Center" TextColor="#efd9fd">
+                                                <Label WidthRequest="150" LineBreakMode="WordWrap" Text="{Binding Name}" FontSize="Medium" Grid.Column="1" VerticalOptions="Center" TextColor="Black">
                                                     <Label.GestureRecognizers>
                                                         <TapGestureRecognizer Command="{Binding Path=BindingContext.CheckAppointmentCommand, Source= {x:Reference Name=dashhome}}"
                                                                               CommandParameter="{Binding .}"/>

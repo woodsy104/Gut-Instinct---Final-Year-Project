@@ -1,17 +1,26 @@
+
+using Gut_Instinct.Models;
+using Microsoft.Maui.Graphics.Converters;
+
+
 namespace Gut_Instinct.Views;
 
 public partial class AllFoodsPage : ContentPage
 {
+    FoodVM vm;
     public AllFoodsPage()
     {
         InitializeComponent();
-
-        BindingContext = new Models.AllFood();
+        vm = new FoodVM();
+        BindingContext= vm;
+        
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
-        ((Models.AllFood)BindingContext).LoadFood();
+        await vm.InitialiseRealm();
+        vm.GetFoodLibrary();
+        
     }
 
     private async void Add_Clicked(object sender, EventArgs e)
@@ -19,18 +28,24 @@ public partial class AllFoodsPage : ContentPage
         await Shell.Current.GoToAsync(nameof(FoodPage));
     }
 
+
     private async void foodCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection.Count != 0)
         {
-            // Get the food model
-            var food = (Models.Food)e.CurrentSelection[0];
+            
+            // Get the note model
+            Food food = (Food)e.CurrentSelection[0];
+            
+            // Should navigate to "NotePage?ItemId=path\on\device\XYZ.notes.txt"
+            //await Shell.Current.GoToAsync($"{nameof(FoodPage)}?{nameof(FoodPage.ItemId)}={food}");
+            //await Shell.Current.DisplayPromptAsync("Name", food.Description);
 
-            // Should navigate to "FoodPage?ItemId=path\on\device\XYZ.foods.txt"
-            await Shell.Current.GoToAsync($"{nameof(FoodPage)}?{nameof(FoodPage.ItemId)}={food.Filename}");
+            await DisplayAlert(food.FoodName, food.Description, "OK");
+            //vm.SelectFood(food);
 
-            // Unselect the UI
-            foodCollection.SelectedItem = null;
+            foodLibrary.SelectedItem = null;
         }
+            
     }
 }

@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gut_Instinct.Models"
+             x:DataType="vm:FoodVM"
              x:Class="Gut_Instinct.Views.FoodPage"
-             Title="FoodPage">
+             Title="Add a new food">
     <VerticalStackLayout Spacing="15" Margin="5">
         <Image Source="dotnet_bot.svg" Margin="15"/>
-        <!--Put Image choice here, This is placeholder-->
 
-        <!-- <Editor x:Name="NameEditor"
-                Placeholder="Enter Food or Meal Name"
-                Text="{Binding Name}"
-                TextTransform="Uppercase"
-                MaxLength="30"
+        <Entry  x:Name="NameT" Placeholder="Enter Food name" 
+                Text="{Binding NameText}"
                 HeightRequest="50"
-                /> -->
-
-        <Editor x:Name="TextEditor"
-                Placeholder="Enter Food/Meal names here....
-                
-                
-                
-                Enter more details here...."
-                Text="{Binding Text}"
-                HeightRequest="150"
                 />
-
+        <Entry x:Name="Descript" Placeholder="Enter any symptoms you felt"
+               Text="{Binding DescripText}"
+               HeightRequest="100"
+               />
+        
         <Grid ColumnSpacing="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -32,20 +24,20 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button BackgroundColor="Green" WidthRequest="100" HeightRequest="100" CornerRadius="360"
-                    Clicked="GreenButton_Clicked"/>
+                    Clicked="Green_Button_Clicked"/>
             <Button Grid.Column="1" BackgroundColor="DarkOrange" WidthRequest="100" HeightRequest="100" CornerRadius="360"
-                    Clicked="OrangeButton_Clicked"/>
+                    Clicked="Orange_Button_Clicked"/>
             <Button Grid.Column="2" BackgroundColor="Red" WidthRequest="100" HeightRequest="100" CornerRadius="360" 
-                    Clicked="RedButton_Clicked"/>
+                    Clicked="Red_Button_Clicked"/>
         </Grid>
-
+        <Entry x:Name="colourpick" IsReadOnly="True" Text="{Binding FoodColour}" FontSize="1" TextColor="White"/>
         <Grid ColumnDefinitions="*,*" ColumnSpacing="4" Margin="5">
             <Button Text="Save"
-                    Clicked="SaveButton_Clicked"/>
+                    Command="{Binding AddFoodCommand}"/>
 
             <Button Grid.Column="1"
                     Text="Delete"
-                    Clicked="DeleteButton_Clicked"/>
+                    />
         </Grid>
     </VerticalStackLayout>
 </ContentPage>

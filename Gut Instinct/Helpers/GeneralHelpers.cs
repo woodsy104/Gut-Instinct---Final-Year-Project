@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maui.Graphics.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,4 +18,5 @@ namespace Gut_Instinct.Helpers
             return new string(a);
         }
     }
+    
 }
