@@ -18,14 +18,14 @@ public partial class MapPage : ContentPage
         Map map = new Map(mapSpan);
         Content = map;
         //LoadPins();
-        /*Pin pin = new Pin
+        Microsoft.Maui.Controls.Maps.Pin newPin = new Microsoft.Maui.Controls.Maps.Pin
         {
             Label = "Arthurs Quay",
             Address = "Shopping Center",
             Type = PinType.Place,
             Location = new Location(52.66482630113309, -8.625857537927548)
         };
-        map.Pins.Add(pin);*/
+        map.Pins.Add(newPin);
         //vm.GetApprovedPins();
         /*foreach (ApprovedPin aPin in vm.ApprovedPins.ToList())
         {
@@ -55,6 +55,8 @@ public partial class MapPage : ContentPage
         map.Pins.Add(pin);*/
 
     }
+
+
 
     protected override async void OnAppearing()
     {

@@ -25,5 +25,9 @@ namespace Gut_Instinct.Models
 
         [MapTo("location")]
         public string Coords { get; set; }
+
+        [Required]
+        [MapTo("_partition")]
+        public string Partition { get; set;}
     }
 }
