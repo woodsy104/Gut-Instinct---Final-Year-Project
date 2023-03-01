@@ -11,6 +11,15 @@
         <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=32}"/>
     </ContentPage.ToolbarItems>
     <Grid>
-        
+        <maps:Map x:Name="map"
+                  ItemsSource="{Binding ApprovedPins}">
+            <maps:Map.ItemTemplate>
+                <DataTemplate x:DataType="vm:ActivePin">
+                    <maps:Pin Location="{Binding Location}"
+                              Address="{Binding Address}"
+                              Label="{Binding Label}" />
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </maps:Map>
     </Grid>
 </ContentPage>
