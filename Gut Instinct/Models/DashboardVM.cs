@@ -63,7 +63,7 @@ namespace Gut_Instinct.Models
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
 
             IsRefreshing = false;
@@ -90,7 +90,7 @@ namespace Gut_Instinct.Models
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
         }
 
@@ -112,7 +112,7 @@ namespace Gut_Instinct.Models
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
             IsBusy = false;
         }
@@ -134,7 +134,7 @@ namespace Gut_Instinct.Models
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
             IsBusy = false;
         }
@@ -164,7 +164,7 @@ namespace Gut_Instinct.Models
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
             IsBusy = false;
         }
@@ -182,9 +182,10 @@ namespace Gut_Instinct.Models
             }
             catch (Exception ex)
             {
-                await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
             }
             IsBusy = false;
         }
+        
     }
 }
