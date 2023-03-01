@@ -38,7 +38,7 @@ namespace Gut_Instinct.Models
                 await App.RealmApp.EmailPasswordAuth.RegisterUserAsync(EmailText, PasswordText);
 
                 await Login();
-
+                
             }
             catch (Exception ex)
             {

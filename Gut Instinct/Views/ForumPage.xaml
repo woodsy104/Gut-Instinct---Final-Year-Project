@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gut_Instinct.Models"
+             x:Class="Gut_Instinct.Views.ForumPage"
+             x:DataType="vm:ForumVM"
+             x:Name="forumlib"
+             Title="Forum">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddThreadCommand}" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
+    </ContentPage.ToolbarItems>
+
+    <CollectionView x:Name="forumLibrary" ItemsSource="{Binding ThreadList}" SelectionMode="Single" SelectionChanged="threadCollection_SelectionChanged">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="vm:Thread">
+                <HorizontalStackLayout>
+                    <Label WidthRequest="1000" VerticalOptions="Center" LineBreakMode="WordWrap" Text="{Binding Title}"/>
+                </HorizontalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

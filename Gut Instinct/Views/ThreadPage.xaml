@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Gut_Instinct.Models"
+             x:DataType="vm:ForumVM"
+             x:Class="Gut_Instinct.Views.ThreadPage"
+             x:Name="thread"
+             Title="ThreadPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout>
+                <Label x:Name="threadTitle" />
+                <Label x:Name="threadContent" />
+                <Entry Text="{Binding CommentText}"/>
+                <Button Clicked="Button_Clicked"/>
+                <VerticalStackLayout>
+                    <CollectionView ItemsSource="{Binding CommentList}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="vm:Comment">
+                                <Label Text="{Binding Body}"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
