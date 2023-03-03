@@ -10,10 +10,10 @@
         <VerticalStackLayout Spacing="25" Padding="30, 0" VerticalOptions="Center">
             <Image Source="gut_instinct_logo.png" Margin="0, 0, 0, 15"/>
             <Frame Padding="12, 5">
-                <Entry Placeholder="Email" Text="{Binding EmailText}"/>
+                <Entry Placeholder="Email" Text="{Binding EmailText}" TextColor="{DynamicResource Primary}"/>
             </Frame>
             <Frame Padding="12, 5">
-                <Entry Placeholder="Password" IsPassword="True" Text="{Binding PasswordText}"/>
+                <Entry Placeholder="Password" IsPassword="True" Text="{Binding PasswordText}" TextColor="{DynamicResource Primary}"/>
             </Frame>
             <Button Text="Login" TextColor="{DynamicResource Secondary}" BackgroundColor="{DynamicResource Primary}" Command="{Binding LoginCommand}"/>
             <Button Text="Create Account" TextColor="{DynamicResource Primary}" Background="Transparent" Command="{Binding CreateAccountCommand}"/>
