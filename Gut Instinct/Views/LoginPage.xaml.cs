@@ -8,6 +8,8 @@ public partial class LoginPage : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = vm;
-	}
+
+        NavigationPage.SetHasNavigationBar(this, false);
+    }
 
 }

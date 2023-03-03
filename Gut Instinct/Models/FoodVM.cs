@@ -82,6 +82,7 @@ namespace Gut_Instinct.Models
             {
                 await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
             }
+            await Shell.Current.GoToAsync("/AllFoodsPage");
             IsBusy =  false;
         }
 
@@ -135,24 +136,6 @@ namespace Gut_Instinct.Models
             IsRefreshing = false; IsBusy = false;
         }
 
-        /*[RelayCommand] //Come back to this when trying to get foodpage working
-        public async void SelectFood(Food food) {
-            IsBusy = true;
-            try{
-                //await Shell.Current.GoToAsync("///FoodPage");
-                //await App.Current.MainPage.DisplayPromptAsync("Edit", food.FoodName);
-                //string newDescription = await App.Current.MainPage.DisplayPromptAsync("Edit", food.Description);
-                Food foundFood = realm.Find<Food>(food.Id);
-                NameText = foundFood.FoodName;
-                DescripText = foundFood.Description;
-                FoodColour = foundFood.Colour;
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-            }
-            IsBusy = false;
-        }*/
 
         [RelayCommand]
         public async void EditFood(Food food) {

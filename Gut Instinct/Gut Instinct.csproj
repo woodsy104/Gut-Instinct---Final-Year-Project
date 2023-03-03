@@ -55,8 +55,11 @@
 	  <None Remove="Resources\Images\edit_icon.png" />
 	  <None Remove="Resources\Images\icon_about.png" />
 	  <None Remove="Resources\Images\icon_about_ios.png" />
+	  <None Remove="Resources\Images\icon_account.png" />
 	  <None Remove="Resources\Images\icon_food.png" />
 	  <None Remove="Resources\Images\icon_food_ios.png" />
+	  <None Remove="Resources\Images\icon_forum.png" />
+	  <None Remove="Resources\Images\icon_home.png" />
 	  <None Remove="Resources\Images\icon_notes.png" />
 	  <None Remove="Resources\Images\icon_notes_ios.png" />
 	  <None Remove="Resources\Images\icon_toilet.png" />
@@ -98,9 +101,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\MapPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\NotePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PinPage.xaml">

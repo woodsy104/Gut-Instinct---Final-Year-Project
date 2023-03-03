@@ -5,7 +5,9 @@
              xmlns:y="clr-namespace:Gut_Instinct.Helpers"
              x:DataType="vm:FoodVM"
              x:Name="foodlib"
-             x:Class="Gut_Instinct.Views.AllFoodsPage">
+             Title="Food Library"
+             x:Class="Gut_Instinct.Views.AllFoodsPage"
+             BackgroundColor="#C689d5">
     <ContentPage.Resources>
         <y:ColourConverter x:Key="ColourConverter"/>
     </ContentPage.Resources>
@@ -13,22 +15,37 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
     </ContentPage.ToolbarItems>
-
-    <CollectionView x:Name="foodLibrary" ItemsSource="{Binding FoodLibrary}"  SelectionMode="Single" SelectionChanged="foodCollection_SelectionChanged">
+    <ScrollView>
+        <CollectionView x:Name="foodLibrary" ItemsSource="{Binding FoodLibrary}"  SelectionMode="Single" SelectionChanged="foodCollection_SelectionChanged">
         <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
             </CollectionView.ItemsLayout>
             
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:Food">
-                <Grid ColumnDefinitions="*, auto, auto">
-                    <HorizontalStackLayout>
-                        <Label  WidthRequest="1000" VerticalOptions="Center" Grid.Column="1" LineBreakMode="WordWrap" Text="{Binding FoodName}" FontSize="22" BackgroundColor="{Binding Colour, Converter={StaticResource ColourConverter}, ConverterParameter=AnyStringHere}"/>
-                    </HorizontalStackLayout>
-                    <ImageButton Grid.Column="1" Source="edit" Command="{Binding Path=BindingContext.EditFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}"/>
-                    <ImageButton Grid.Column="2" Source="delete" Command="{Binding Path=BindingContext.DeleteFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}"/>
-                </Grid>
+                <Border StrokeThickness="4" BackgroundColor="{Binding Colour, Converter={StaticResource ColourConverter}, ConverterParameter=AnyStringHere}" StrokeShape="RoundRectangle 0,30, 30, 0" Padding="16, 16">
+                    <Border.Stroke>
+                        <LinearGradientBrush EndPoint="0, 1">
+                            <GradientStop Color="{DynamicResource Primary}" Offset="0.25"/>
+                                <GradientStop Color="{DynamicResource Secondary}" Offset="0.25"/>
+                            </LinearGradientBrush>
+                    </Border.Stroke>
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20, 20"
+                                    Radius="30"
+                                    Opacity="0.5"/>
+                        </Border.Shadow>
+                    <Grid ColumnDefinitions="*, auto, auto">
+                        <HorizontalStackLayout>
+                            <Label  WidthRequest="10000" VerticalOptions="Center" Grid.Column="1" LineBreakMode="WordWrap" Text="{Binding FoodName}" FontAttributes="Bold" Margin="15, 0, 0, 0" FontSize="22"/>
+                        </HorizontalStackLayout>
+                        <ImageButton Grid.Column="1" Source="edit" Command="{Binding Path=BindingContext.EditFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}" Margin="0, 0, 5, 0"/>
+                        <ImageButton Grid.Column="2" Source="delete" Command="{Binding Path=BindingContext.DeleteFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}" Margin="0, 0, 10, 0"/>
+                    </Grid>
+                </Border>
             </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+    </ScrollView>
 </ContentPage>

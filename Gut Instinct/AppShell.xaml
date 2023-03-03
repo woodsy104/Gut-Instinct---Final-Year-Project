@@ -5,17 +5,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:Gut_Instinct.Views">
 
-  
-        
-    <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" Route="Login"/>
-
+    <FlyoutItem Title="Switch Account" Icon="{OnPlatform 'icon_account.png', iOS='icon_account.png', MacCatalyst='icon_account.png'}">
+        <ShellContent ContentTemplate="{DataTemplate views:LoginPage}" Route="Login"/>
+    </FlyoutItem>
+    
     <FlyoutItem Title="Dashboard"
-                Icon="{OnPlatform 'icon_toilet.png', iOS='icon_toilet_ios.png', MacCatalyst='icon_toilet_ios.png'}">
+                Icon="{OnPlatform 'icon_home.png', iOS='icon_home.png', MacCatalyst='icon_home.png'}">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:Dashboard}" Route="Main"/>
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Forum">
+    <FlyoutItem Title="Forum" Icon="{OnPlatform 'icon_forum.png', iOS='icon_forum.png', MacCatalyst='icon_forum.png'}">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate views:ForumPage}"/>
         </Tab>
@@ -44,4 +44,5 @@
             <ShellContent ContentTemplate="{DataTemplate views:AboutPage}"/>
         </Tab>
     </FlyoutItem>
+    
 </Shell>

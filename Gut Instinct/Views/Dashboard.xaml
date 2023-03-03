@@ -4,7 +4,8 @@
              xmlns:vm="clr-namespace:Gut_Instinct.Models"
              x:DataType="vm:DashboardVM"
              x:Name="dashhome"
-             x:Class="Gut_Instinct.Views.Dashboard">
+             x:Class="Gut_Instinct.Views.Dashboard"
+             BackgroundColor="#C689d5">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}"/>
     </ContentPage.ToolbarItems>
