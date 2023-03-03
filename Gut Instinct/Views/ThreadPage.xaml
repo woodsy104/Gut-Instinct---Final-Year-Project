@@ -5,24 +5,37 @@
              x:DataType="vm:ForumVM"
              x:Class="Gut_Instinct.Views.ThreadPage"
              x:Name="thread"
-             Title="ThreadPage">
-    <ContentPage.Content>
-        <ScrollView>
-            <VerticalStackLayout>
-                <Label x:Name="threadTitle" />
-                <Label x:Name="threadContent" />
-                <Entry Text="{Binding CommentText}"/>
-                <Button Clicked="Button_Clicked"/>
+             Title="ThreadPage"
+             BackgroundColor="#C689d5">
+
+        <VerticalStackLayout>
+            <Border BackgroundColor="{DynamicResource Secondary}" Padding="32, 32" Margin="1, 5, 1, 30">
                 <VerticalStackLayout>
-                    <CollectionView ItemsSource="{Binding CommentList}">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="vm:Comment">
-                                <Label Text="{Binding Body}"/>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                <Label x:Name="threadTitle" TextColor="DarkViolet" Margin="10, 0, 10, 10" HorizontalOptions="CenterAndExpand" FontSize="Medium" FontAttributes="Bold" FontAutoScalingEnabled="True"/>
+                    <Label x:Name="threadContent" Margin="10, 10, 10, 10" HorizontalOptions="Start" FontSize="Body" FontAutoScalingEnabled="True"/>
                 </VerticalStackLayout>
-            </VerticalStackLayout>
-        </ScrollView>
-    </ContentPage.Content>
+            </Border>
+        <Label Text="Comments" VerticalOptions="Center" HorizontalOptions="Center" Margin="10, 0, 10, 10" FontSize="Header" FontAttributes="Bold" TextDecorations="Underline"/>
+                <ScrollView>
+                    <VerticalStackLayout>
+                        <CollectionView ItemsSource="{Binding CommentList}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+                        </CollectionView.ItemsLayout>
+                        
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="vm:Comment">
+                                    <Border BackgroundColor="{DynamicResource Secondary}" Padding="10, 10">
+                                    <HorizontalStackLayout>
+                                        <Label TextColor="DarkViolet" WidthRequest="1000" VerticalOptions="Center" HorizontalOptions="Center" LineBreakMode="WordWrap" Text="{Binding Body}" FontAttributes="Bold" FontSize="15"/>
+                                    </HorizontalStackLayout>
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </ScrollView>
+          <Entry Placeholder="Add a comment?" Text="{Binding CommentText}"/>
+          <Button BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Secondary}" Text="Add Comment" Clicked="Button_Clicked"/>
+        </VerticalStackLayout>
 </ContentPage>

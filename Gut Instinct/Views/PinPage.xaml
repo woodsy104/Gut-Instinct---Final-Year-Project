@@ -4,15 +4,29 @@
              xmlns:vm="clr-namespace:Gut_Instinct.Models"
              x:DataType="vm:PinVM"
              x:Class="Gut_Instinct.Views.PinPage"
-             Title="Add a Toilet">
+             Title="Add a Toilet"
+             BackgroundColor="#C689d5">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Label Text="Place holder for the heading of this page"/>
+        <Label TextColor="{DynamicResource Secondary}" Text="Enter a Toilet location " HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" TextDecorations="Underline" Margin="10, 10, 10, 10"/>
+
+        <Border StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="8, 8, 8, 8" BackgroundColor="{DynamicResource Primary}" Margin="10, 10, 10, 10">
+            <Label TextColor="{DynamicResource Secondary}" Text="Enter the location, be specific i.e. Address/Eircode" FontAttributes="Bold, Italic" HorizontalOptions="Center"/>
+        </Border>
         <Entry Placeholder="Enter the Toilet Location Name:" Text="{Binding Address}"
-                HeightRequest="100"/>
+                HeightRequest="40" PlaceholderColor="Black"/>
+        
+        <Border StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="8, 8, 8, 8" BackgroundColor="{DynamicResource Primary}" Margin="10, 10, 10, 10">
+            <Label TextColor="{DynamicResource Secondary}" Text="Does the Toilet Cost Money? True/False" FontAttributes="Bold, Italic" HorizontalOptions="Center"/>
+        </Border>
         <Entry  Placeholder="Toilet Cost?" Text="{Binding IsFree}"
-                HeightRequest="100"/>
+                HeightRequest="40" PlaceholderColor="Black" HorizontalOptions="Center"/>
+        
+        <Border StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="8, 8, 8, 8" BackgroundColor="{DynamicResource Primary}" Margin="10, 10, 10, 10">
+            <Label TextColor="{DynamicResource Secondary}" Text="Enter a star rating 1 - 5!" FontAttributes="Bold, Italic" HorizontalOptions="Center"/>
+        </Border>
+        
         <Entry  Placeholder="Enter you star rating" Text="{Binding Stars}"
-                HeightRequest="100"/>
+                HeightRequest="40" PlaceholderColor="Black" HorizontalOptions="Center"/>
         <Button Text="Submit pin"
                 Command="{Binding AddPinCommand}"/>
     </VerticalStackLayout>

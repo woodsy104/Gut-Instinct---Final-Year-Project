@@ -5,22 +5,26 @@
              x:Class="Gut_Instinct.Views.ForumPage"
              x:DataType="vm:ForumVM"
              x:Name="forumlib"
-             Title="Forum">
+             Title="Forum"
+             BackgroundColor="#C689d5">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddThreadCommand}" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
     </ContentPage.ToolbarItems>
+    <ScrollView>
+        <CollectionView x:Name="forumLibrary" ItemsSource="{Binding ThreadList}" SelectionMode="Single" SelectionChanged="threadCollection_SelectionChanged">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
+            </CollectionView.ItemsLayout>
 
-    <CollectionView x:Name="forumLibrary" ItemsSource="{Binding ThreadList}" SelectionMode="Single" SelectionChanged="threadCollection_SelectionChanged">
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
-        </CollectionView.ItemsLayout>
-
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="vm:Thread">
-                <HorizontalStackLayout>
-                    <Label WidthRequest="1000" VerticalOptions="Center" LineBreakMode="WordWrap" Text="{Binding Title}"/>
-                </HorizontalStackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vm:Thread">
+                    <Border BackgroundColor="{DynamicResource Secondary}" Padding="16, 16">
+                        <HorizontalStackLayout>
+                            <Label TextColor="DarkViolet" WidthRequest="1000" VerticalOptions="Center" HorizontalOptions="Center" LineBreakMode="WordWrap" Text="{Binding Title}" FontAttributes="Bold" FontSize="15" FontAutoScalingEnabled="True"/>
+                        </HorizontalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
 </ContentPage>

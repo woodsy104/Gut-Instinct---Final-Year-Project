@@ -63,13 +63,14 @@ namespace Gut_Instinct.Models
                     realm.Add(newPin);
                 });
                 Address = "";
-                Stars = 0;
-                IsFree = false;
+                //Stars = 0;
+                //IsFree = false;
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
             }
+            await Shell.Current.GoToAsync("/MapPage");
             IsBusy = false;
         }
     }
