@@ -15,15 +15,7 @@ namespace Gut_Instinct.Models
         public MapVM()
         {
             approvedPins = new ObservableCollection<ActivePin>();
-            ActivePin pin = new ActivePin
-            {
-                Label = "Arthurs Quay",
-                Address = "Shopping Center",
-                
-                Location = new Location(52.66482630113309, -8.625857537927548)
-            };
-            approvedPins.Add(pin);
-
+           
         }
 
         [ObservableProperty]
@@ -41,26 +33,28 @@ namespace Gut_Instinct.Models
         [RelayCommand]
         public async void GetApprovedPins() { 
             IsBusy= true;
-            //ApprovedPins.Clear();
+            ApprovedPins.Clear();
             try
             {
-                
-                    var collection = realm.All<ApprovedPin>().ToList();
-                    var documents = collection.Where(d => d.Partition == "");
 
-                    foreach (var pin in documents)
-                    {
-                        ActivePin newPin = new ActivePin
-                        {
-                            Location = new Location(pin.XCoord, pin.YCoord),
-                            Address = pin.Name,
-                            Label = pin.Name
-                            
-                        };
-                        Console.WriteLine(pin.Name);
-                        ApprovedPins.Add(newPin);
-                    }
-                
+                /*var collection = realm.All<ApprovedPin>().ToList();
+                var documents = collection.Where(d => d.Partition == "");
+
+                foreach (var pin in documents)
+                {
+                    ApprovedPins.Add(pin);
+                Console.WriteLine("LIST FOUND");
+                }
+            Console.WriteLine(documents);
+            Console.WriteLine(collection);*/
+                ActivePin pin = new ActivePin
+                {
+                    Location = "52.66360947291635, -8.622154572741387",
+                    Address = "Milk Market",
+                    Label = "Toilet"
+                };
+                ApprovedPins = new ObservableCollection<ActivePin>();
+                ApprovedPins.Add(pin);
             }
             catch (Exception ex)
             {

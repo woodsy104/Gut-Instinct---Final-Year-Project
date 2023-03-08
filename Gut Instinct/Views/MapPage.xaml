@@ -4,22 +4,28 @@
              xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials"
              xmlns:vm="clr-namespace:Gut_Instinct.Models"
+             xmlns:y="clr-namespace:Gut_Instinct.Helpers"
              x:DataType="vm:MapVM"
              x:Class="Gut_Instinct.Views.MapPage"
              Title="Toilet Map">
+    <ContentPage.Resources>
+        <y:LocationConverter x:Key="LocationConverter"/>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=32}"/>
     </ContentPage.ToolbarItems>
     <Grid>
         <maps:Map x:Name="map"
                   ItemsSource="{Binding ApprovedPins}">
-            <maps:Map.ItemTemplate>
-                <DataTemplate x:DataType="vm:ActivePin">
-                    <maps:Pin Location="{Binding Location}"
+                <maps:Map.ItemTemplate>
+                    <DataTemplate x:DataType="vm:ActivePin">
+                    <maps:Pin Location="{Binding Location, Converter={StaticResource LocationConverter}, ConverterParameter=AnyStringHere}"
                               Address="{Binding Address}"
-                              Label="{Binding Label}" />
-                </DataTemplate>
-            </maps:Map.ItemTemplate>
-        </maps:Map>
+                              Label="{Binding Label}"
+                                  Type="Place"/>
+                    </DataTemplate>
+                </maps:Map.ItemTemplate>
+            </maps:Map>
     </Grid>
 </ContentPage>
