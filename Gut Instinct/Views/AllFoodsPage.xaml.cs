@@ -48,4 +48,10 @@ public partial class AllFoodsPage : ContentPage
         }
             
     }
+
+    private void ToolbarItem_Clicked(object sender, EventArgs e)
+    {
+        DisplayAlert("What do the colours mean?!", "Green = Good; " +
+            "Orange = Sometimes good, Sometimes not; " + "Red = Bad, Avoid;", "OK");
+    }
 }

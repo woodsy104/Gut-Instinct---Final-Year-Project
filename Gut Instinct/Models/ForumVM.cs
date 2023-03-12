@@ -11,7 +11,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static Android.Provider.ContactsContract.CommonDataKinds;
 
 namespace Gut_Instinct.Models
 {

@@ -65,25 +65,39 @@ namespace Gut_Instinct.Models
             if (string.IsNullOrWhiteSpace(NameText) || string.IsNullOrWhiteSpace(DescripText) || string.IsNullOrWhiteSpace(FoodColour))
                 return;
             IsBusy = true;
-            try
-            {
-                var newFood = new Food {
-                    FoodName = NameText,
-                    Owner = App.RealmApp.CurrentUser.Profile.Email,
-                    Description = DescripText,
-                    Colour = FoodColour
-                };
-                realm.Write(() =>
+            bool present = false;
+
+            foreach (Food food in realm.All<Food>().ToList()) {
+                if (food.FoodName.ToUpper() == NameText.ToUpper()) {
+                    present = true; break;
+                }
+            }
+
+            if (present == false) {
+                try
                 {
-                    realm.Add(newFood);
-                });
+                    var newFood = new Food {
+                        FoodName = NameText,
+                        Owner = App.RealmApp.CurrentUser.Profile.Email,
+                        Description = DescripText,
+                        Colour = FoodColour
+                    };
+                    realm.Write(() =>
+                    {
+                        realm.Add(newFood);
+                    });
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                }
+                await Shell.Current.GoToAsync("/AllFoodsPage");
+                IsBusy = false;
             }
-            catch (Exception ex)
+            else
             {
-                await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                await Application.Current.MainPage.DisplayAlert("Error", "That food is already in your library!", "OK");
             }
-            await Shell.Current.GoToAsync("/AllFoodsPage");
-            IsBusy =  false;
         }
 
         [RelayCommand]
@@ -128,7 +142,7 @@ namespace Gut_Instinct.Models
         public async void EditFood(Food food) {
             
             
-            string action = await App.Current.MainPage.DisplayActionSheet("Would you like to edit name or description?", "Cancel", null, null, "Name", "Description");
+            string action = await App.Current.MainPage.DisplayActionSheet("Would you like to edit name or description?", "Cancel", null, "Name", "Description", "Colour");
 
             switch (action) {
 
@@ -169,6 +183,26 @@ namespace Gut_Instinct.Models
                         {
                             var foundFood = realm.Find<Food>(food.Id);
                             foundFood.Description = newDescript.ToString();
+                        }
+                        );
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                    }
+                    break;
+
+                case "Colour":
+                    string colour = await App.Current.MainPage.DisplayActionSheet("What colour would you like to pick", "Cancel", null, "Green", "Orange", "Red");
+                    try
+                    {
+                        if (colour == "Orange") {
+                            colour = "DarkOrange";
+                        }
+                        realm.Write(() =>
+                        {
+                            var foundFood = realm.Find<Food>(food.Id);
+                            foundFood.Colour = colour.ToString();
                         }
                         );
                     }
