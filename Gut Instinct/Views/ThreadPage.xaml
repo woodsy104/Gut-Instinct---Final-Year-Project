@@ -20,17 +20,22 @@
         <Button BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Secondary}" Text="Add Comment" Clicked="Button_Clicked"/>
         <ScrollView>
             <VerticalStackLayout>
-                <CollectionView ItemsSource="{Binding CommentList}">
+                <CollectionView x:Name="commentLibrary" ItemsSource="{Binding CommentList}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
                     </CollectionView.ItemsLayout>
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:Comment">
-                            <Border BackgroundColor="{DynamicResource Secondary}" Padding="10, 10">
-                                <HorizontalStackLayout>
-                                    <Label TextColor="DarkViolet" WidthRequest="1000" VerticalOptions="Center" HorizontalOptions="Center" LineBreakMode="WordWrap" Text="{Binding Body}" FontAttributes="Bold" FontSize="15"/>
-                                </HorizontalStackLayout>
+                            <Border BackgroundColor="{DynamicResource Secondary}" Padding="12, 12">
+                                <Grid ColumnDefinitions="*, auto, auto">
+                                    <VerticalStackLayout>
+                                        <Label TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="WordWrap" Text="{Binding Owner}" FontSize="9" FontAutoScalingEnabled="True" Margin="0, 0, 0, 5"/>
+                                        <Label TextColor="DarkViolet" WidthRequest="1000" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="WordWrap" Text="{Binding Body}" FontAttributes="Bold" FontSize="15"/>
+                                    </VerticalStackLayout>
+                                    <ImageButton Grid.Column="1" Source="edit" Command="{Binding Path=BindingContext.EditCommentCommand, Source={x:Reference Name = thread}}" CommandParameter="{Binding .}" Margin="0, 0, 5, 0"/>
+                                    <ImageButton Grid.Column="2" Source="delete" Command="{Binding Path=BindingContext.DeleteCommentCommand, Source={x:Reference Name = thread}}" CommandParameter="{Binding .}" Margin="0, 0, 10, 0"/>
+                                </Grid>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

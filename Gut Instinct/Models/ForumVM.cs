@@ -11,6 +11,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static Android.Provider.ContactsContract.CommonDataKinds;
 
 namespace Gut_Instinct.Models
 {
@@ -46,12 +47,12 @@ namespace Gut_Instinct.Models
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
             realm = Realm.GetInstance(config);
             
-            GetForum();
+            //GetForum();
             if (ThreadList.Count == 0)
             {
                 DisplayText = "Loading";
-                await Task.Delay(1000);
-                //GetForum();
+                await Task.Delay(100);
+                GetForum();
                 DisplayText = "No questions to be answered";
             }
         }
@@ -118,18 +119,91 @@ namespace Gut_Instinct.Models
         [RelayCommand]
         async Task DeleteThread(Thread thread)
         {
+            config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
+            realm = Realm.GetInstance(config);
             IsBusy = true;
             try
             {
-                realm.Write(() => {
-                    realm.Remove(thread);
-                });
+                if (App.RealmApp.CurrentUser.Profile.Email == thread.Owner) {
+                    realm.Write(() => {
+                        realm.Remove(thread);
+                    });
 
-                ThreadList.Remove(thread);
+                    ThreadList.Remove(thread);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You can't delete what isn't yours!", "OK");
+                }
             }
             catch (Exception ex)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            IsBusy = false;
+        }
+
+        [RelayCommand]
+        public async void EditThread(Thread thread)
+        {
+            config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
+            realm = Realm.GetInstance(config);
+            IsBusy = true;
+            if (thread.Owner == App.RealmApp.CurrentUser.Profile.Email) {
+                string action = await App.Current.MainPage.DisplayActionSheet("Would you like to edit title or description?", "Cancel", null, null, "Title", "Description");
+                switch (action)
+                {
+
+                    case "Title":
+                        string newName = await App.Current.MainPage.DisplayPromptAsync("Edit Title", thread.Title);
+
+                        if (newName is null || string.IsNullOrWhiteSpace(newName.ToString()))
+                        {
+                            return;
+                        }
+
+                        try
+                        {
+                            realm.Write(() =>
+                            {
+                                var foundThread = realm.Find<Thread>(thread.Id);
+                                foundThread.Title = newName.ToString();
+                            }
+                            );
+                        }
+                        catch (Exception ex)
+                        {
+                            await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                        }
+                        break;
+
+                    case "Description":
+                        string newDescript = await App.Current.MainPage.DisplayPromptAsync("Edit Description", thread.Content);
+
+                        if (newDescript is null || string.IsNullOrWhiteSpace(newDescript.ToString()))
+                        {
+                            return;
+                        }
+
+                        try
+                        {
+                            realm.Write(() =>
+                            {
+                                var foundThread = realm.Find<Thread>(thread.Id);
+                                foundThread.Content = newDescript.ToString();
+                            }
+                            );
+                        }
+                        catch (Exception ex)
+                        {
+                            await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "You can't edit what isn't yours!", "OK");
             }
             IsBusy = false;
         }
@@ -161,6 +235,71 @@ namespace Gut_Instinct.Models
             CommentText = "";
             IsBusy = false;
             loadComments(threadTitle);
+        }
+
+        [RelayCommand]
+        async Task DeleteComment(Comment comment)
+        {
+            config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
+            realm = Realm.GetInstance(config);
+            IsBusy = true;
+            try
+            {
+                if (App.RealmApp.CurrentUser.Profile.Email == comment.Owner)
+                {
+                    realm.Write(() => {
+                        realm.Remove(comment);
+                    });
+
+                    CommentList.Remove(comment);
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You can't delete what isn't yours!", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+            IsBusy = false;
+        }
+
+
+        [RelayCommand]
+        public async void EditComment(Comment comment)
+        {
+            config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
+            realm = Realm.GetInstance(config);
+            IsBusy = true;
+            if (comment.Owner == App.RealmApp.CurrentUser.Profile.Email)
+            {
+                string newText = await App.Current.MainPage.DisplayPromptAsync("Edit", comment.Body);
+
+                if (newText is null || string.IsNullOrWhiteSpace(newText.ToString()))
+                {
+                    return;
+                }
+
+                try
+                {
+                    realm.Write(() =>
+                    {
+                        var foundComment = realm.Find<Comment>(comment.Id);
+                        foundComment.Body = newText.ToString();
+                    }
+                    );
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                }
+                IsBusy = false;
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "You can't edit what isn't yours!", "OK");
+            }
         }
 
         [RelayCommand]

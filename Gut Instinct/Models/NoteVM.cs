@@ -58,6 +58,7 @@ namespace Gut_Instinct.Models
         public async void EditNote(Note note)
         {
             string newText = await App.Current.MainPage.DisplayPromptAsync("Edit", note.NoteText);
+            
 
             if (newText is null || string.IsNullOrWhiteSpace(newText.ToString()))
             {

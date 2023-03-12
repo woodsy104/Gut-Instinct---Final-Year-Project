@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Gut_Instinct.Models"
              x:DataType="vm:NoteVM"
+             x:Name="notelib"
              x:Class="Gut_Instinct.Views.AllNotesPage"
              Title="Your Notes"
              BackgroundColor="#C689d5">
@@ -30,7 +31,13 @@
                 <DataTemplate x:DataType="vm:Note">
                     <StackLayout>
                         <Border BackgroundColor="{DynamicResource Secondary}" Padding="16, 16" StrokeShape="RoundRectangle 30, 30, 30, 30">
-                            <Label TextColor="{DynamicResource Primary}" Text="{Binding NoteText}" FontSize="22"/>
+                            <Grid ColumnDefinitions="*, auto, auto">
+                                <HorizontalStackLayout>
+                                    <Label TextColor="{DynamicResource Primary}" Text="{Binding NoteText}" FontSize="22"/>
+                                </HorizontalStackLayout>
+                                <ImageButton Grid.Column="1" Source="edit" Command="{Binding Path=BindingContext.EditNoteCommand, Source={x:Reference Name = notelib}}" CommandParameter="{Binding .}" Margin="0, 0, 5, 0"/>
+                                <ImageButton Grid.Column="2" Source="delete" Command="{Binding Path=BindingContext.DeleteTaskCommand, Source={x:Reference Name = notelib}}" CommandParameter="{Binding .}" Margin="0, 0, 10, 0"/>
+                            </Grid>
                         </Border>
                     </StackLayout>
                 </DataTemplate>
