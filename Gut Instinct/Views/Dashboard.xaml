@@ -2,12 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Gut_Instinct.Models"
+              xmlns:y="clr-namespace:Gut_Instinct.Helpers"
              x:DataType="vm:DashboardVM"
              x:Name="dashhome"
              x:Class="Gut_Instinct.Views.Dashboard"
              BackgroundColor="#C689d5">
+    <ContentPage.Resources>
+        <y:ColourConverter x:Key="ColourConverter"/>
+    </ContentPage.Resources>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}"/>
+        <ToolbarItem Text="Index" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>

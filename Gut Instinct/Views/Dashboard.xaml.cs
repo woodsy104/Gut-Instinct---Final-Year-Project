@@ -18,4 +18,10 @@ public partial class Dashboard : ContentPage
 		await vm.InitialiseRealm();
 		vm.GetAppointments();
     }
+
+    private void ToolbarItem_Clicked(object sender, EventArgs e)
+    {
+        DisplayAlert("What do the colours mean?!", "Blue = GP Visit; " +
+            "Pink = Specialist Visit; " + "Yellow = MISC;", "OK");
+    }
 }
