@@ -18,10 +18,15 @@
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:Thread">
-                    <Border BackgroundColor="{DynamicResource Secondary}" Padding="16, 16">
-                        <HorizontalStackLayout>
-                            <Label TextColor="DarkViolet" WidthRequest="1000" VerticalOptions="Center" HorizontalOptions="Center" LineBreakMode="WordWrap" Text="{Binding Title}" FontAttributes="Bold" FontSize="15" FontAutoScalingEnabled="True"/>
-                        </HorizontalStackLayout>
+                    <Border BackgroundColor="{DynamicResource Secondary}" Padding="20, 20">
+                        <Grid ColumnDefinitions="*, auto, auto">
+                            <VerticalStackLayout>
+                                <Label TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start" LineBreakMode="WordWrap" Text="{Binding Owner}" FontSize="9" FontAutoScalingEnabled="True" Margin="0, 0, 0, 5"/>
+                                <Label TextColor="DarkViolet" WidthRequest="500" VerticalOptions="Center" HorizontalOptions="Start"  Text="{Binding Title}" FontAttributes="Bold" FontSize="15" FontAutoScalingEnabled="True"/>
+                            </VerticalStackLayout>
+                            <ImageButton Grid.Column="1" Source="edit" Command="{Binding Path=BindingContext.EditThreadCommand, Source={x:Reference Name = forumlib}}" CommandParameter="{Binding .}" Margin="0, 0, 5, 0"/>
+                            <ImageButton Grid.Column="2" Source="delete" Command="{Binding Path=BindingContext.DeleteThreadCommand, Source={x:Reference Name = forumlib}}" CommandParameter="{Binding .}" Margin="0, 0, 10, 0"/>
+                        </Grid>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

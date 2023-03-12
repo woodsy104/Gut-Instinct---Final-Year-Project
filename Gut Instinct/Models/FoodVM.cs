@@ -103,19 +103,6 @@ namespace Gut_Instinct.Models
             IsBusy = false;
         }
 
-        [RelayCommand]
-        public Task ColourSetOrange()
-        {
-            //FoodColour = "Orange";
-            return null;
-        }
-
-        [RelayCommand]
-        public Task ColourSetGreen()
-        {
-            //FoodColour = "Green";
-            return null;
-        }
 
         [RelayCommand]
         public async void GetFoodLibrary()

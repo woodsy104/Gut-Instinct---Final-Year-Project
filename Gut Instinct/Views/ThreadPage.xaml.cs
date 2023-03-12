@@ -31,4 +31,5 @@ public partial class ThreadPage : ContentPage
 		await 
 		vm.AddComment(label.Text);
     }
+
 }
