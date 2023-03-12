@@ -72,27 +72,62 @@ namespace Gut_Instinct.Models
 
         [RelayCommand]
         public async void EditAppointment(Appointment app) {
-            string newText = await App.Current.MainPage.DisplayPromptAsync("Edit", app.Name);
+            string editApp = await App.Current.MainPage.DisplayActionSheet("Would you like to edit the Note or it's category", "Cancel", null, null, "Note", "Category");
 
-            if(newText is null|| string.IsNullOrWhiteSpace(newText.ToString()))
-            {
-                return;
-            }
+            switch (editApp) {
+               case "Note":
+                    string newText = await App.Current.MainPage.DisplayPromptAsync("Edit", app.Name);
 
-            try
-            {
-                realm.Write(() =>
-                {
-                    var foundApp = realm.Find<Appointment>(app.Id);
-                    foundApp.Name = GeneralHelpers.UpperCaseFirst(newText.ToString());
-                }
-                );
+                    if (newText is null || string.IsNullOrWhiteSpace(newText.ToString()))
+                    {
+                        return;
+                    }
+
+                    try
+                    {
+                        realm.Write(() =>
+                        {
+                            var foundApp = realm.Find<Appointment>(app.Id);
+                            foundApp.Name = GeneralHelpers.UpperCaseFirst(newText.ToString());
+                        }
+                        );
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                    }
+                    break;
+
+                case "Category":
+                    string checkApp = await App.Current.MainPage.DisplayActionSheet("What would you like to change the appointment to?", "Cancel", null, "GP", "Specialist", "Other");
+                    string newColour = "";
+
+                    if (checkApp == "GP") {
+                        newColour = "LightBlue";
+                    } else if (checkApp == "Specialist") {
+                        newColour = "Pink";
+                    }
+                    else
+                    {
+                        newColour = "Yellow";
+                    }
+                    try
+                    {
+                        realm.Write(() =>
+                        {
+                            var foundApp = realm.Find<Appointment>(app.Id);
+                            foundApp.Colour = newColour.ToString();
+                        }
+                        );
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                    }
+                    break;
             }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-        }
+       }
+        
 
         [RelayCommand]
         public async void CheckAppointment(Appointment app)
@@ -144,6 +179,17 @@ namespace Gut_Instinct.Models
         {
             if (string.IsNullOrWhiteSpace(AppEntryText))
                 return;
+            string checkApp = await App.Current.MainPage.DisplayActionSheet("Is this appointment for the GP, Specialist or Other", "Cancel", null, "GP", "Specialist", "Other");
+            string newColour = "";
+            if (checkApp == "GP") {
+                newColour = "LightBlue";
+            } else if (checkApp == "Specialist") {
+                newColour = "Pink";
+            }
+            else
+            {
+                newColour = "Yellow";
+            }
             IsBusy = true;
             try
             {
@@ -152,7 +198,8 @@ namespace Gut_Instinct.Models
                     {
                         Name = GeneralHelpers.UpperCaseFirst(AppEntryText),
                         Partition = App.RealmApp.CurrentUser.Id,
-                        Owner = App.RealmApp.CurrentUser.Profile.Email
+                        Owner = App.RealmApp.CurrentUser.Profile.Email,
+                        Colour = newColour
                     };
                 realm.Write(() =>
                 {

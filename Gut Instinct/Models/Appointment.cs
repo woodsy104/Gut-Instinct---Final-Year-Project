@@ -24,6 +24,9 @@ namespace Gut_Instinct.Models
         [MapTo("completed")]
         public bool Completed { get; set; }
 
+        [MapTo("colour")]
+        public string Colour { get; set; }
+
         [MapTo("_partition")]
         [Required]
         public string Partition { get; set; }
