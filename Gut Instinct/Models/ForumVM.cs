@@ -175,29 +175,6 @@ namespace Gut_Instinct.Models
                             await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
                         }
                         break;
-
-                    case "Description":
-                        string newDescript = await App.Current.MainPage.DisplayPromptAsync("Edit Description", thread.Content);
-
-                        if (newDescript is null || string.IsNullOrWhiteSpace(newDescript.ToString()))
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            realm.Write(() =>
-                            {
-                                var foundThread = realm.Find<Thread>(thread.Id);
-                                foundThread.Content = newDescript.ToString();
-                            }
-                            );
-                        }
-                        catch (Exception ex)
-                        {
-                            await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-                        }
-                        break;
                 }
             }
             else

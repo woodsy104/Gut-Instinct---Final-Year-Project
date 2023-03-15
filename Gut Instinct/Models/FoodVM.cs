@@ -126,7 +126,7 @@ namespace Gut_Instinct.Models
 
             try
             {
-                var flist = realm.All<Food>().ToList();
+                var flist = realm.All<Food>().ToList().OrderBy(f => f.FoodName);
                 FoodLibrary = new ObservableCollection<Food>(flist);
             }
             catch (Exception ex)
