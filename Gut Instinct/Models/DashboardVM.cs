@@ -34,6 +34,9 @@ namespace Gut_Instinct.Models
         [ObservableProperty]
         bool isRefreshing;
 
+        [ObservableProperty]
+        DateTime entryDate;
+
         public async Task InitialiseRealm()
         {
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
@@ -72,10 +75,10 @@ namespace Gut_Instinct.Models
 
         [RelayCommand]
         public async void EditAppointment(Appointment app) {
-            string editApp = await App.Current.MainPage.DisplayActionSheet("Would you like to edit the Note or it's category", "Cancel", null, null, "Note", "Category");
+            string editApp = await App.Current.MainPage.DisplayActionSheet("Would you like to edit the Appointment or it's category", "Cancel", null, "Appointment", "Category", "Date");
 
             switch (editApp) {
-               case "Note":
+               case "Appointment":
                     string newText = await App.Current.MainPage.DisplayPromptAsync("Edit", app.Name);
 
                     if (newText is null || string.IsNullOrWhiteSpace(newText.ToString()))
@@ -117,6 +120,34 @@ namespace Gut_Instinct.Models
                         {
                             var foundApp = realm.Find<Appointment>(app.Id);
                             foundApp.Colour = newColour.ToString();
+                        }
+                        );
+                    }
+                    catch (Exception ex)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                    }
+                    break;
+
+                case "Date":
+                    string newDate = await App.Current.MainPage.DisplayPromptAsync("Enter your new date in the same format as below","MM/DD/YYYY");
+                    DateTime dateTime= DateTime.Now;
+                    try
+                    {
+                        dateTime = DateTime.Parse(newDate);
+                    }
+                    catch(FormatException)
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "Please enter the date in the correct format", "OK");
+                        return;
+                    }
+
+                    try
+                    {
+                        realm.Write(() =>
+                        {
+                            var foundApp = realm.Find<Appointment>(app.Id);
+                            foundApp.Date = new DateTimeOffset(dateTime);
                         }
                         );
                     }
@@ -199,7 +230,8 @@ namespace Gut_Instinct.Models
                         Name = GeneralHelpers.UpperCaseFirst(AppEntryText),
                         Partition = App.RealmApp.CurrentUser.Id,
                         Owner = App.RealmApp.CurrentUser.Profile.Email,
-                        Colour = newColour
+                        Colour = newColour,
+                        Date = new DateTimeOffset(EntryDate)
                     };
                 realm.Write(() =>
                 {

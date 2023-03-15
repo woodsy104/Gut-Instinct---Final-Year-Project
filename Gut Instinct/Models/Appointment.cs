@@ -27,6 +27,9 @@ namespace Gut_Instinct.Models
         [MapTo("colour")]
         public string Colour { get; set; }
 
+        [MapTo("date")]
+        public DateTimeOffset Date { get; set; }
+
         [MapTo("_partition")]
         [Required]
         public string Partition { get; set; }
