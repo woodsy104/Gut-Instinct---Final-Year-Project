@@ -14,39 +14,50 @@
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="Add_Clicked" IconImageSource="{FontImage Glyph='+', Color=White, Size=22}" />
+        <ToolbarItem Text="Chart" Clicked="ToolbarItem_Clicked_1"/>
         <ToolbarItem Text="Index" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
+    
     <ScrollView>
-        <CollectionView x:Name="foodLibrary" ItemsSource="{Binding FoodLibrary}"  SelectionMode="Single" SelectionChanged="foodCollection_SelectionChanged">
+        <VerticalStackLayout>
+            <Label x:Name="RedCount"  Text="{Binding Path=BindingContext.RedCount, Source={x:Reference Name = foodlib}}" TextColor="Transparent" FontSize="0.1"/>
+            <Label x:Name ="OrangeCount" Text="{Binding Path=BindingContext.OrangeCount, Source={x:Reference Name = foodlib}}" TextColor="Transparent" FontSize="0.1"/>
+            <Label x:Name="GreenCount" Grid.Column="3" Text="{Binding Path=BindingContext.GreenCount, Source={x:Reference Name = foodlib}}" TextColor="Transparent" FontSize="0.1"/>
+            <CollectionView x:Name="foodLibrary" ItemsSource="{Binding FoodLibrary}"  SelectionMode="Single" SelectionChanged="foodCollection_SelectionChanged">
+            
         <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
             </CollectionView.ItemsLayout>
-            
+
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:Food">
-                <Border StrokeThickness="4" BackgroundColor="{Binding Colour, Converter={StaticResource ColourConverter}, ConverterParameter=AnyStringHere}" StrokeShape="RoundRectangle 0,30, 30, 0" Padding="16, 16">
-                    <Border.Stroke>
-                        <LinearGradientBrush EndPoint="0, 1">
-                            <GradientStop Color="{DynamicResource Primary}" Offset="0.25"/>
+                    <Border StrokeThickness="4" BackgroundColor="{Binding Colour, Converter={StaticResource ColourConverter}, ConverterParameter=AnyStringHere}" StrokeShape="RoundRectangle 0,30, 30, 0" Padding="16, 16">
+                        <Border.Stroke>
+                            <LinearGradientBrush EndPoint="0, 1">
+                                <GradientStop Color="{DynamicResource Primary}" Offset="0.25"/>
                                 <GradientStop Color="{DynamicResource Secondary}" Offset="0.25"/>
                             </LinearGradientBrush>
-                    </Border.Stroke>
+                        </Border.Stroke>
                         <Border.Shadow>
                             <Shadow Brush="Black"
                                     Offset="20, 20"
                                     Radius="30"
                                     Opacity="0.5"/>
                         </Border.Shadow>
-                    <Grid ColumnDefinitions="*, auto, auto">
-                        <HorizontalStackLayout>
-                            <Label  WidthRequest="10000" VerticalOptions="Center" Grid.Column="1" LineBreakMode="WordWrap" Text="{Binding FoodName}" FontAttributes="Bold" Margin="15, 0, 0, 0" FontSize="22"/>
-                        </HorizontalStackLayout>
-                        <ImageButton Grid.Column="1" Source="edit" Command="{Binding Path=BindingContext.EditFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}" Margin="0, 0, 5, 0"/>
-                        <ImageButton Grid.Column="2" Source="delete" Command="{Binding Path=BindingContext.DeleteFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}" Margin="0, 0, 10, 0"/>
-                    </Grid>
-                </Border>
-            </DataTemplate>
+                        <Grid ColumnDefinitions="*, auto, auto">
+                            <HorizontalStackLayout>
+                                <Label  WidthRequest="10000" VerticalOptions="Center" Grid.Column="1" LineBreakMode="WordWrap" Text="{Binding FoodName}" FontAttributes="Bold" Margin="15, 0, 0, 0" FontSize="22"/>
+                            </HorizontalStackLayout>
+                            <ImageButton Grid.Column="1" Source="edit" Command="{Binding Path=BindingContext.EditFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}" Margin="0, 0, 5, 0"/>
+                            <ImageButton Grid.Column="2" Source="delete" Command="{Binding Path=BindingContext.DeleteFoodCommand, Source={x:Reference Name = foodlib}}" CommandParameter="{Binding .}" Margin="0, 0, 10, 0"/>
+                            <Label x:Name="RedCount" Grid.Column="3" Text="{Binding Path=BindingContext.RedCount, Source={x:Reference Name = foodlib}}" TextColor="Transparent" FontSize="0.1"/>
+                            <Label x:Name ="OrangeCount" Grid.Column="3" Text="{Binding Path=BindingContext.OrangeCount, Source={x:Reference Name = foodlib}}" TextColor="Transparent" FontSize="0.1"/>
+                            <Label x:Name="GreenCount" Grid.Column="3" Text="{Binding Path=BindingContext.GreenCount, Source={x:Reference Name = foodlib}}" TextColor="Transparent" FontSize="0.1"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

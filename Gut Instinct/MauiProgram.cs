@@ -1,5 +1,6 @@
 ﻿using Gut_Instinct.Models;
 using Gut_Instinct.Views;
+using Syncfusion.Maui.Core.Hosting;
 
 namespace Gut_Instinct;
 
@@ -10,6 +11,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
+            .ConfigureSyncfusionCore()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

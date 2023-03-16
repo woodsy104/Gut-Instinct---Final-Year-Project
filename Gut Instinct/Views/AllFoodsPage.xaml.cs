@@ -1,7 +1,7 @@
 
 using Gut_Instinct.Models;
 using Microsoft.Maui.Graphics.Converters;
-
+using Syncfusion.Maui.Core.Internals;
 
 namespace Gut_Instinct.Views;
 
@@ -13,7 +13,7 @@ public partial class AllFoodsPage : ContentPage
         InitializeComponent();
         vm = new FoodVM();
         BindingContext= vm;
-        
+       
     }
 
     protected override async void OnAppearing()
@@ -43,7 +43,7 @@ public partial class AllFoodsPage : ContentPage
 
             await DisplayAlert(food.FoodName, food.Description, "OK");
             //vm.SelectFood(food);
-
+            
             foodLibrary.SelectedItem = null;
         }
             
@@ -53,5 +53,15 @@ public partial class AllFoodsPage : ContentPage
     {
         DisplayAlert("What do the colours mean?!", "Green = Good; " +
             "Orange = Sometimes good, Sometimes not; " + "Red = Bad, Avoid;", "OK");
+    }
+
+    private async void ToolbarItem_Clicked_1(object sender, EventArgs e)
+    {
+        int red = int.Parse(RedCount.Text.ToString());
+        
+        int orange = int.Parse(OrangeCount.Text.ToString());
+        int green = int.Parse(GreenCount.Text.ToString());
+        
+        await Navigation.PushAsync(new ChartPage(red, orange, green));
     }
 }
