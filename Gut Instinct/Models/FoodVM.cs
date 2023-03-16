@@ -45,6 +45,15 @@ namespace Gut_Instinct.Models
         [ObservableProperty]
         bool isRefreshing;
 
+        [ObservableProperty]
+        string redCount;
+
+        [ObservableProperty]
+        string orangeCount;
+
+        [ObservableProperty]
+        string greenCount;
+
         public async Task InitialiseRealm()
         {
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
@@ -123,11 +132,30 @@ namespace Gut_Instinct.Models
         {
             IsRefreshing = true;
             IsBusy = true;
-
+            int Reds = 0; int Oranges = 0; int Greens = 0;
             try
             {
                 var flist = realm.All<Food>().ToList().OrderBy(f => f.FoodName);
                 FoodLibrary = new ObservableCollection<Food>(flist);
+
+                foreach (Food e in FoodLibrary) {
+                    switch (e.Colour)
+                    {
+                        case "Green":
+                            Greens++;
+                            break;
+                        case "DarkOrange":
+                            Oranges++;
+                            break;
+                        case "Red":
+                            Reds++;
+                            break;
+                    }
+                }
+                GreenCount = Greens.ToString();
+                OrangeCount= Oranges.ToString();
+                RedCount = Reds.ToString();
+
             }
             catch (Exception ex)
             {
@@ -212,6 +240,7 @@ namespace Gut_Instinct.Models
                     }
                     break;
             }
+            GetFoodLibrary();
         }
     }
 }
