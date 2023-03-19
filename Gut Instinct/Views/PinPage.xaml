@@ -18,16 +18,27 @@
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="8, 8, 8, 8" BackgroundColor="{DynamicResource Primary}" Margin="10, 10, 10, 10">
             <Label TextColor="{DynamicResource Secondary}" Text="Does the Toilet Cost Money? True/False" FontAttributes="Bold, Italic" HorizontalOptions="Center"/>
         </Border>
-        <Entry  Placeholder="Toilet Cost?" Text="{Binding IsFree}"
-                HeightRequest="40" PlaceholderColor="Black" HorizontalOptions="Center"/>
-        
+        <Grid ColumnSpacing="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Text="Yes" WidthRequest="100" HeightRequest="100" CornerRadius="360"
+                        Clicked="Button_Clicked"/>
+            <Button Text ="No" Grid.Column="1" WidthRequest="100" HeightRequest="100" CornerRadius="360"
+                        Clicked="Button_Clicked_1"/>
+        </Grid>
+
         <Border StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="8, 8, 8, 8" BackgroundColor="{DynamicResource Primary}" Margin="10, 10, 10, 10">
             <Label TextColor="{DynamicResource Secondary}" Text="Enter a star rating 1 - 5!" FontAttributes="Bold, Italic" HorizontalOptions="Center"/>
         </Border>
         
-        <Entry  Placeholder="Enter you star rating" Text="{Binding Stars}"
+        <Entry Keyboard="Numeric" Placeholder="Enter you star rating" Text="{Binding Stars}"
                 HeightRequest="40" PlaceholderColor="Black" HorizontalOptions="Center"/>
         <Button Text="Submit pin"
                 Command="{Binding AddPinCommand}"/>
+
+        <Entry x:Name="costPick" IsReadOnly="True" Text="{Binding IsFree}" FontSize="0.1" TextColor="Transparent"/>
     </VerticalStackLayout>
 </ContentPage>

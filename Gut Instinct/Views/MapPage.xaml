@@ -18,14 +18,29 @@
     <Grid>
         <maps:Map x:Name="map"
                   ItemsSource="{Binding ApprovedPins}">
-                <maps:Map.ItemTemplate>
-                    <DataTemplate x:DataType="vm:ActivePin">
-                    <maps:Pin Location="{Binding Location, Converter={StaticResource LocationConverter}, ConverterParameter=AnyStringHere}"
+            <x:Arguments>
+                <MapSpan>
+                    <x:Arguments>
+                        <sensors:Location>
+                            <x:Arguments>
+                                <x:Double>52.66482630113309</x:Double>
+                                <x:Double>-8.625857537927548</x:Double>
+                            </x:Arguments>
+                        </sensors:Location>
+                        <x:Double>0.01</x:Double>
+                        <x:Double>0.01</x:Double>
+                    </x:Arguments>
+                </MapSpan>
+            </x:Arguments>
+            <maps:Map.ItemTemplate>
+                <DataTemplate x:DataType="vm:ActivePin">
+                    <maps:Pin MarkerClicked="Pin_InfoWindowClicked"
+                              Location="{Binding Location, Converter={StaticResource LocationConverter}, ConverterParameter=Location}"
                               Address="{Binding Address}"
                               Label="{Binding Label}"
                                   Type="Place"/>
-                    </DataTemplate>
-                </maps:Map.ItemTemplate>
-            </maps:Map>
+                </DataTemplate>
+            </maps:Map.ItemTemplate>
+        </maps:Map>
     </Grid>
 </ContentPage>

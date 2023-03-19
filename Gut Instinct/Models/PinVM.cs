@@ -47,7 +47,14 @@ namespace Gut_Instinct.Models
         {
             if (string.IsNullOrWhiteSpace(Address))
                 return;
-            IsBusy= true;
+
+            if (Stars < 1 || Stars > 5)
+            {
+                await Application.Current.MainPage.DisplayPromptAsync("Error", "Enter a value between 1-5!");
+                return;
+            }
+
+            IsBusy = true;
             try
             {
                 var newPin = new Pin
@@ -71,6 +78,7 @@ namespace Gut_Instinct.Models
                 await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
             }
             await Shell.Current.GoToAsync("/MapPage");
+
             IsBusy = false;
         }
     }

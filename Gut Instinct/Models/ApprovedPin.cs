@@ -14,6 +14,9 @@ namespace Gut_Instinct.Models
         [MapTo("_id")]
         public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
 
+        [MapTo("owner")]
+        public string Owner { get; set; }
+
         [MapTo("name")]
         public string Name { get; set; }
 

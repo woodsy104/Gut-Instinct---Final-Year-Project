@@ -34,15 +34,9 @@ public partial class AllFoodsPage : ContentPage
         if (e.CurrentSelection.Count != 0)
         {
             
-            // Get the note model
             Food food = (Food)e.CurrentSelection[0];
-            
-            // Should navigate to "NotePage?ItemId=path\on\device\XYZ.notes.txt"
-            //await Shell.Current.GoToAsync($"{nameof(FoodPage)}?{nameof(FoodPage.ItemId)}={food}");
-            //await Shell.Current.DisplayPromptAsync("Name", food.Description);
 
             await DisplayAlert(food.FoodName, food.Description, "OK");
-            //vm.SelectFood(food);
             
             foodLibrary.SelectedItem = null;
         }
