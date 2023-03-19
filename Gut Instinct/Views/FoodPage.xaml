@@ -39,6 +39,6 @@
         <Button TextColor="{DynamicResource Secondary}" Text="Save"
                     Command="{Binding AddFoodCommand}" Padding="16" FontSize="20" FontAttributes="Bold, Italic"/>
        
-        <Entry x:Name="colourpick" IsReadOnly="True" Text="{Binding FoodColour}" FontSize="1" TextColor="White"/>
+        <Entry x:Name="colourpick" IsReadOnly="True" Text="{Binding FoodColour}" FontSize="1" TextColor="Transparent"/>
     </VerticalStackLayout>
 </ContentPage>

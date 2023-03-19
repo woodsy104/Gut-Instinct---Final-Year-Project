@@ -36,25 +36,17 @@ namespace Gut_Instinct.Models
             ApprovedPins.Clear();
             try
             {
-
-                /*var collection = realm.All<ApprovedPin>().ToList();
-                var documents = collection.Where(d => d.Partition == "");
-
-                foreach (var pin in documents)
+                var allUsers = App.RealmApp.AllUsers;
+                foreach (var user in allUsers)
                 {
-                    ApprovedPins.Add(pin);
-                Console.WriteLine("LIST FOUND");
+                    config = new PartitionSyncConfiguration($"{user.Id}", user);
+                    realm = await Realm.GetInstanceAsync(config);
+
+                    foreach (ActivePin pin in realm.All<ActivePin>().ToList())
+                    {
+                        ApprovedPins.Add(pin);
+                    }   
                 }
-            Console.WriteLine(documents);
-            Console.WriteLine(collection);*/
-                ActivePin pin = new ActivePin
-                {
-                    Location = "52.66360947291635, -8.622154572741387",
-                    Address = "Milk Market",
-                    Label = "Toilet"
-                };
-                ApprovedPins = new ObservableCollection<ActivePin>();
-                ApprovedPins.Add(pin);
             }
             catch (Exception ex)
             {

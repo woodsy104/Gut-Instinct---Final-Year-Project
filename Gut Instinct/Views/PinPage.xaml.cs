@@ -16,4 +16,14 @@ public partial class PinPage : ContentPage
     {
         await vm.InitialiseRealm();
     }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+        costPick.Text = "true";
+    }
+
+    private void Button_Clicked_1(object sender, EventArgs e)
+    {
+        costPick.Text = "false";
+    }
 }
