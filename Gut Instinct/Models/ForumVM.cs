@@ -37,6 +37,9 @@ namespace Gut_Instinct.Models
         string threadEntryText;
 
         [ObservableProperty]
+        string threadOwnerText;
+
+        [ObservableProperty]
         string displayText;
 
         [ObservableProperty]
@@ -85,8 +88,9 @@ namespace Gut_Instinct.Models
         {
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
             realm = Realm.GetInstance(config);
-            string TitleEntryText = await App.Current.MainPage.DisplayPromptAsync("Edit Name", "Give an Interesting Title!");
-            string ThreadEntryText = await App.Current.MainPage.DisplayPromptAsync("Edit Name", "Add some detail!");
+            string ThreadOwnerText = await App.Current.MainPage.DisplayPromptAsync("Enter a Name", "Be anonymous or have your name displayed!");
+            string TitleEntryText = await App.Current.MainPage.DisplayPromptAsync("Enter a Title", "Make it eye grabbing!");
+            string ThreadEntryText = await App.Current.MainPage.DisplayPromptAsync("Details", "Add some of the fine print!");
             if (string.IsNullOrWhiteSpace(ThreadEntryText))
                 return;
             IsBusy = true;
@@ -98,7 +102,7 @@ namespace Gut_Instinct.Models
                         Title = TitleEntryText,
                         Content = ThreadEntryText,
                         Partition = App.RealmApp.CurrentUser.Id,
-                        Owner = App.RealmApp.CurrentUser.Profile.Email
+                        Owner = ThreadOwnerText
                     };
                 realm.Write(() =>
                 {
@@ -123,7 +127,7 @@ namespace Gut_Instinct.Models
             IsBusy = true;
             try
             {
-                if (App.RealmApp.CurrentUser.Profile.Email == thread.Owner) {
+                if (thread.Partition == App.RealmApp.CurrentUser.Id) {
                     realm.Write(() => {
                         realm.Remove(thread);
                     });
@@ -148,13 +152,12 @@ namespace Gut_Instinct.Models
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
             realm = Realm.GetInstance(config);
             IsBusy = true;
-            if (thread.Owner == App.RealmApp.CurrentUser.Profile.Email) {
-                string action = await App.Current.MainPage.DisplayActionSheet("Would you like to edit title or description?", "Cancel", null, null, "Title", "Description");
+            if (thread.Partition == App.RealmApp.CurrentUser.Id) {
+                string action = await App.Current.MainPage.DisplayActionSheet("Would you like to edit title or description?", "Cancel", null, "Name", "Title", "Description");
                 switch (action)
                 {
-
-                    case "Title":
-                        string newName = await App.Current.MainPage.DisplayPromptAsync("Edit Title", thread.Title);
+                    case "Name":
+                        string newName = await App.Current.MainPage.DisplayPromptAsync("Edit Name", thread.Owner);
 
                         if (newName is null || string.IsNullOrWhiteSpace(newName.ToString()))
                         {
@@ -166,7 +169,53 @@ namespace Gut_Instinct.Models
                             realm.Write(() =>
                             {
                                 var foundThread = realm.Find<Thread>(thread.Id);
-                                foundThread.Title = newName.ToString();
+                                foundThread.Owner = newName.ToString();
+                            }
+                            );
+                        }
+                        catch (Exception ex)
+                        {
+                            await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                        }
+                        break;
+
+                    case "Title":
+                        string newTitle = await App.Current.MainPage.DisplayPromptAsync("Edit Title", thread.Title);
+
+                        if (newTitle is null || string.IsNullOrWhiteSpace(newTitle.ToString()))
+                        {
+                            return;
+                        }
+
+                        try
+                        {
+                            realm.Write(() =>
+                            {
+                                var foundThread = realm.Find<Thread>(thread.Id);
+                                foundThread.Title = newTitle.ToString();
+                            }
+                            );
+                        }
+                        catch (Exception ex)
+                        {
+                            await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
+                        }
+                        break;
+
+                    case "Description":
+                        string newDescript = await App.Current.MainPage.DisplayPromptAsync("Edit Description", thread.Content);
+
+                        if (newDescript is null || string.IsNullOrWhiteSpace(newDescript.ToString()))
+                        {
+                            return;
+                        }
+
+                        try
+                        {
+                            realm.Write(() =>
+                            {
+                                var foundThread = realm.Find<Thread>(thread.Id);
+                                foundThread.Content = newDescript.ToString();
                             }
                             );
                         }
@@ -188,6 +237,7 @@ namespace Gut_Instinct.Models
         public async Task AddComment(String threadTitle) {
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
             realm = Realm.GetInstance(config);
+            string ThreadOwnerText = await App.Current.MainPage.DisplayPromptAsync("Enter a Name", "Be anonymous or have your name displayed!");
             IsBusy = true;
             if (string.IsNullOrWhiteSpace(CommentText))
                 return;
@@ -198,7 +248,7 @@ namespace Gut_Instinct.Models
                     ThreadTitle = threadTitle,
                     Body = CommentText,
                     Partition = App.RealmApp.CurrentUser.Id,
-                    Owner = App.RealmApp.CurrentUser.Profile.Email
+                    Owner = ThreadOwnerText
                 };
                 realm.Write(() => {
                     realm.Add(comment);
@@ -221,7 +271,7 @@ namespace Gut_Instinct.Models
             IsBusy = true;
             try
             {
-                if (App.RealmApp.CurrentUser.Profile.Email == comment.Owner)
+                if (comment.Partition == App.RealmApp.CurrentUser.Id)
                 {
                     realm.Write(() => {
                         realm.Remove(comment);
@@ -248,7 +298,7 @@ namespace Gut_Instinct.Models
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
             realm = Realm.GetInstance(config);
             IsBusy = true;
-            if (comment.Owner == App.RealmApp.CurrentUser.Profile.Email)
+            if (comment.Partition == App.RealmApp.CurrentUser.Id)
             {
                 string newText = await App.Current.MainPage.DisplayPromptAsync("Edit", comment.Body);
 
