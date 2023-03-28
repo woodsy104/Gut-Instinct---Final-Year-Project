@@ -70,7 +70,7 @@ namespace Gut_Instinct.Models
                     realm.Add(newPin);
                 });
                 Address = "";
-                //Stars = 0;
+                Stars = 0;
                 //IsFree = false;
             }
             catch (Exception ex)
