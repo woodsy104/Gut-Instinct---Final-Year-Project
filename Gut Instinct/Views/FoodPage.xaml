@@ -41,7 +41,7 @@
         </Border>
         
         <Button TextColor="{DynamicResource Secondary}" Text="Save"
-                  BackgroundColor="{DynamicResource Primary}"  Command="{Binding AddFoodCommand}" Padding="16" FontSize="20" FontAttributes="Bold, Italic"/>
+                  BackgroundColor="{DynamicResource Primary}"  Command="{Binding AddFoodCommand}" Padding="16" FontSize="20" FontAttributes="Bold"/>
        
         <Entry x:Name="colourpick" IsReadOnly="True" Text="{Binding FoodColour}" FontSize="1" TextColor="Transparent" HeightRequest="0.1"/>
     </VerticalStackLayout>
