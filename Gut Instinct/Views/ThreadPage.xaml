@@ -7,19 +7,21 @@
              x:Name="thread"
              Title="ThreadPage"
              BackgroundColor="#C689d5">
-
-    <VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
         <Border BackgroundColor="{DynamicResource Secondary}" Padding="32, 32" Margin="1, 5, 1, 30">
             <VerticalStackLayout>
                 <Label x:Name="threadTitle" TextColor="DarkViolet" Margin="10, 0, 10, 10" HorizontalOptions="CenterAndExpand" FontSize="Medium" FontAttributes="Bold" FontAutoScalingEnabled="True"/>
                 <Label x:Name="threadContent" Margin="10, 10, 10, 10" HorizontalOptions="Start" FontSize="Body" FontAutoScalingEnabled="True"/>
             </VerticalStackLayout>
         </Border>
-        <Label Text="Comments" VerticalOptions="Center" HorizontalOptions="Center" Margin="10, 0, 10, 10" FontSize="Header" FontAttributes="Bold" TextDecorations="Underline"/>
-        <Entry Placeholder="Add a comment?" Text="{Binding CommentText}" TextColor="DarkViolet"/>
-        <Button BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Secondary}" Text="Add Comment" Clicked="Button_Clicked"/>
-        <ScrollView>
+
             <VerticalStackLayout>
+                <Label Text="Comments" VerticalOptions="Center" HorizontalOptions="Center" Margin="10, 0, 10, 10" FontSize="Header" FontAttributes="Bold" TextDecorations="Underline"/>
+                <Entry Placeholder="Add a comment?" Text="{Binding CommentText}" TextColor="DarkViolet"/>
+                <Button BackgroundColor="{DynamicResource Primary}" TextColor="{DynamicResource Secondary}" Text="Add Comment" Clicked="Button_Clicked"/>
+
+
                 <CollectionView x:Name="commentLibrary" ItemsSource="{Binding CommentList}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
@@ -41,6 +43,6 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </VerticalStackLayout>
-        </ScrollView>
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

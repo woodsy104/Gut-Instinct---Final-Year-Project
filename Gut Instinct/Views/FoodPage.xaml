@@ -8,16 +8,20 @@
              BackgroundColor="#C689d5">
     <VerticalStackLayout Spacing="15" Margin="5">
         <Image Source="dotnet_bot.svg" Margin="15"/>
-
-        <Entry  x:Name="NameT" Placeholder="Enter Food name" 
-                Text="{Binding NameText}"
-                HeightRequest="50" PlaceholderColor="Black" FontAttributes="Bold, Italic"/>
-        <Entry x:Name="Descript" Placeholder="Enter any symptoms you felt"
-               Text="{Binding DescripText}"
-               HeightRequest="100" PlaceholderColor="Black" FontAttributes="Bold, Italic"/>
         <Border StrokeThickness="2" StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="16, 20" BackgroundColor="{DynamicResource Secondary}">
             <VerticalStackLayout>
-                <Label Text="Select a colour to denote how the food makes you feel!" Margin="10, 0, 10, 10" FontAttributes="Bold" HorizontalOptions="Center" FontSize="15"/>
+                <Label Text="Food Details" TextColor="{DynamicResource Primary}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+
+                <Entry  x:Name="NameT" Placeholder="Enter Food name" 
+                Text="{Binding NameText}"
+                HeightRequest="50" PlaceholderColor="Black" FontAttributes="Bold" Opacity="0.5"/>
+                
+                <Entry x:Name="Descript" Placeholder="Enter any symptoms you felt"
+               Text="{Binding DescripText}"
+               HeightRequest="75" PlaceholderColor="Black" FontAttributes="Bold" Opacity="0.5"/>
+
+
+                <Label Text="Pick the best matching colour!" Margin="10, 0, 10, 10" TextColor="{DynamicResource Primary}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium" Padding="10,10,10,10"/>
 
                 <Grid ColumnSpacing="4">
                     <Grid.ColumnDefinitions>
@@ -37,8 +41,8 @@
         </Border>
         
         <Button TextColor="{DynamicResource Secondary}" Text="Save"
-                    Command="{Binding AddFoodCommand}" Padding="16" FontSize="20" FontAttributes="Bold, Italic"/>
+                  BackgroundColor="{DynamicResource Primary}"  Command="{Binding AddFoodCommand}" Padding="16" FontSize="20" FontAttributes="Bold, Italic"/>
        
-        <Entry x:Name="colourpick" IsReadOnly="True" Text="{Binding FoodColour}" FontSize="1" TextColor="Transparent"/>
+        <Entry x:Name="colourpick" IsReadOnly="True" Text="{Binding FoodColour}" FontSize="1" TextColor="Transparent" HeightRequest="0.1"/>
     </VerticalStackLayout>
 </ContentPage>

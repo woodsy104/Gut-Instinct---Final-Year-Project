@@ -61,7 +61,7 @@ namespace Gut_Instinct.Models
 
             try
             {
-                var tlist = realm.All<Appointment>().ToList().Reverse<Appointment>().OrderBy(t => t.Completed);
+                var tlist = realm.All<Appointment>().ToList().Reverse<Appointment>().OrderBy(t => t.Date);
                 AppointmentList = new ObservableCollection<Appointment>(tlist);
             }
             catch (Exception ex)

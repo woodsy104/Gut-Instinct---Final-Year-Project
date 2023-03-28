@@ -25,7 +25,7 @@ public partial class AllNotesPage : ContentPage
             // Get the note model
             var note = (Note)e.CurrentSelection[0];
 
-            // Should navigate to "NotePage?ItemId=path\on\device\XYZ.notes.txt"
+            
             await DisplayAlert(note.NoteText,null, "OK");
 
             // Unselect the UI

@@ -7,38 +7,41 @@
              Title="Add a Toilet"
              BackgroundColor="#C689d5">
     <VerticalStackLayout Spacing="10" Margin="5">
-        <Label TextColor="{DynamicResource Secondary}" Text="Enter a Toilet location " HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" TextDecorations="Underline" Margin="10, 10, 10, 10"/>
+        <Border StrokeThickness="2" StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="16, 20" BackgroundColor="{DynamicResource Secondary}">
+            <VerticalStackLayout>
+                <Label TextColor="{DynamicResource Primary}" Text="Submit a New Pin" HorizontalOptions="Center" FontSize="Large" FontAttributes="Bold" Margin="10, 10, 10, 10"/>
 
-        <Border StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="8, 8, 8, 8" BackgroundColor="{DynamicResource Primary}" Margin="10, 10, 10, 10">
-            <Label TextColor="{DynamicResource Secondary}" Text="Enter the location, be specific i.e. Address/Eircode" FontAttributes="Bold, Italic" HorizontalOptions="Center"/>
-        </Border>
-        <Entry Placeholder="Enter the Toilet Location Name:" Text="{Binding Address}"
-                HeightRequest="40" PlaceholderColor="Black"/>
+                <Label TextColor="{DynamicResource Primary}" Text="Enter the location, be specific" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium" Padding="10,10,10,10"/>
         
-        <Border StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="8, 8, 8, 8" BackgroundColor="{DynamicResource Primary}" Margin="10, 10, 10, 10">
-            <Label TextColor="{DynamicResource Secondary}" Text="Does the Toilet Cost Money? True/False" FontAttributes="Bold, Italic" HorizontalOptions="Center"/>
-        </Border>
-        <Grid ColumnSpacing="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+                 <Entry Placeholder="Enter the Toilet Location Name:" Text="{Binding Address}"
+                    HeightRequest="40" PlaceholderColor="Black" Opacity="0.5"/>
+               
+                <Label TextColor="{DynamicResource Primary}" Text="Enter a star rating 1 - 5!" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium" Padding="10,10,10,10"/>
 
-            <Button Text="Yes" WidthRequest="100" HeightRequest="100" CornerRadius="360"
-                        Clicked="Button_Clicked"/>
-            <Button Text ="No" Grid.Column="1" WidthRequest="100" HeightRequest="100" CornerRadius="360"
-                        Clicked="Button_Clicked_1"/>
-        </Grid>
+                <Entry Keyboard="Numeric" Placeholder="Enter you star rating" Text="{Binding Stars}"
+                    HeightRequest="40" PlaceholderColor="Black" Opacity="0.5"/>
 
-        <Border StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="8, 8, 8, 8" BackgroundColor="{DynamicResource Primary}" Margin="10, 10, 10, 10">
-            <Label TextColor="{DynamicResource Secondary}" Text="Enter a star rating 1 - 5!" FontAttributes="Bold, Italic" HorizontalOptions="Center"/>
+                <Label TextColor="{DynamicResource Primary}" Padding="10,10,10,0" Text="Does this toilet cost money?" Margin="10, 0, 10, 20" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>
+                <Grid ColumnSpacing="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Text="Yes" WidthRequest="100" HeightRequest="100" CornerRadius="360"
+                                Clicked="Button_Clicked" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"
+                            FontSize="Medium"/>
+                    <Button Text ="No" Grid.Column="1" WidthRequest="100" HeightRequest="100" CornerRadius="360"
+                                Clicked="Button_Clicked_1" FontAttributes="Bold" TextColor="{DynamicResource Secondary}"
+                            FontSize="Medium"/>
+                </Grid>
+            </VerticalStackLayout>
         </Border>
         
-        <Entry Keyboard="Numeric" Placeholder="Enter you star rating" Text="{Binding Stars}"
-                HeightRequest="40" PlaceholderColor="Black" HorizontalOptions="Center"/>
-        <Button Text="Submit pin"
-                Command="{Binding AddPinCommand}"/>
+        <Button Text="Submit Pin"
+                Command="{Binding AddPinCommand}" TextColor="{DynamicResource Secondary}" BackgroundColor="{DynamicResource Primary}"
+                Padding="16" FontSize="20" FontAttributes="Bold"/>
 
-        <Entry x:Name="costPick" IsReadOnly="True" Text="{Binding IsFree}" FontSize="0.1" TextColor="Transparent"/>
+        <Entry x:Name="costPick" IsReadOnly="True" Text="{Binding IsFree}" FontSize="0.1" TextColor="Transparent" HeightRequest="0.1"/>
     </VerticalStackLayout>
 </ContentPage>
