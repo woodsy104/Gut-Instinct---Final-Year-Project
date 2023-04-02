@@ -17,10 +17,24 @@ public partial class ChartPage : ContentPage
             new NumCount { Colour = "Green", Count = green}
         };
 
+        List<Brush> colours = new List<Brush>();
+        int x = 0;
+        while (x < 1) {
+            colours.Add(new SolidColorBrush(Color.FromRgb(198, 137, 213)));
+            colours.Add(new SolidColorBrush(Color.FromRgb(239, 21, 21)));
+            colours.Add(new SolidColorBrush(Color.FromRgb(252, 137, 41)));
+            colours.Add(new SolidColorBrush(Color.FromRgb(12, 224, 5)));
+            x++;
+        }
+
+
+        
 
         foodChart.Title = new Label
         {
-            Text = "Food Colour Comparisons"
+            Text = "Food Colour Comparisons",
+            HorizontalOptions= LayoutOptions.Center,
+            FontAttributes = FontAttributes.Bold
         };
 
         CategoryAxis primaryAxis = new CategoryAxis();
@@ -51,6 +65,7 @@ public partial class ChartPage : ContentPage
         };
         
         foodChart.Series.Add(foods);
+        foodChart.PaletteBrushes = colours;
         this.Content = foodChart;
     }
 

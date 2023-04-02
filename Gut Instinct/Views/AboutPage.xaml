@@ -2,16 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:models="clr-namespace:Gut_Instinct.Models"
-             x:Class="Gut_Instinct.Views.AboutPage">
+             x:Class="Gut_Instinct.Views.AboutPage"
+             Title="About"
+             >
     <ContentPage.BindingContext>
         <models:About />
     </ContentPage.BindingContext>
     <VerticalStackLayout>
         <Image Source="ul_logo.png"/>
-        <!-- <Label FontSize="22" FontAttributes="Bold" Text="{Binding Title}" VerticalOptions="End" />
-            <Label FontSize="22" Text="{Binding Version}" VerticalOptions="End" />  Maybe Put this in Flyout-->
-
-        <Label Text="{Binding Message}" />
+        <Border BackgroundColor="{DynamicResource Secondary}" Padding="16, 16" StrokeShape="RoundRectangle 20, 20, 20, 20">
+            <Label TextColor="{DynamicResource Primary}" Text="{Binding Message}" FontAttributes="Bold"/>
+        </Border>
         <Button Text="Learn more about Crohn's" Clicked="LearnMore_Clicked" Margin="15,20,15,5"/>
     </VerticalStackLayout>
 </ContentPage>

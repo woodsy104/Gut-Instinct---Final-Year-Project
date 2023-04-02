@@ -43,7 +43,7 @@
                                         <VerticalStackLayout>
                                             <Label Text="{Binding Date, StringFormat='{0:dd MMMM, yyyy}'}" HorizontalOptions="StartAndExpand"></Label>
                                             <HorizontalStackLayout>
-                                                <CheckBox IsChecked="{Binding Completed}" IsEnabled="False">
+                                                <CheckBox IsChecked="{Binding Completed}" IsEnabled="True">
                                                     <CheckBox.GestureRecognizers>
                                                         <TapGestureRecognizer Command="{Binding Path=BindingContext.CheckAppointmentCommand, Source= {x:Reference Name = dashhome}}"
                                                                               CommandParameter="{Binding .}"/>
