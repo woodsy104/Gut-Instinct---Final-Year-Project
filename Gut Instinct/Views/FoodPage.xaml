@@ -7,7 +7,7 @@
              Title="Add a new food"
              BackgroundColor="#C689d5">
     <VerticalStackLayout Spacing="15" Margin="5">
-        <Image Source="dotnet_bot.svg" Margin="15"/>
+        <!--<Image Source="dotnet_bot.svg" Margin="15"/>-->
         <Border StrokeThickness="2" StrokeShape="RoundRectangle 30, 30, 30, 30" Padding="16, 20" BackgroundColor="{DynamicResource Secondary}">
             <VerticalStackLayout>
                 <Label Text="Food Details" TextColor="{DynamicResource Primary}" FontAttributes="Bold" HorizontalOptions="Center" FontSize="Medium"/>

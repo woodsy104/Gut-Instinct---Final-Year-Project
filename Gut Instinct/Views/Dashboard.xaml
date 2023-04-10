@@ -6,13 +6,14 @@
              x:DataType="vm:DashboardVM"
              x:Name="dashhome"
              x:Class="Gut_Instinct.Views.Dashboard"
+             Title="Dashboard"
              BackgroundColor="#C689d5">
     <ContentPage.Resources>
         <y:ColourConverter x:Key="ColourConverter"/>
     </ContentPage.Resources>
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}"/>
+        <!--<ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}"/>-->
         <ToolbarItem Text="Index" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
 

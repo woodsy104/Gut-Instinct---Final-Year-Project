@@ -29,6 +29,12 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                     </CollectionView.ItemsLayout>
 
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding EmptyNote}" FontSize="Medium" TextColor="Grey"/>
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    
                     <!-- Define the appearance of each item in the list -->
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:Note">

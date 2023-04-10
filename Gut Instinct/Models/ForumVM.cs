@@ -22,6 +22,7 @@ namespace Gut_Instinct.Models
         public ForumVM() { 
             threadList = new ObservableCollection<Thread>();
             commentList = new ObservableCollection<Comment>();
+            DisplayText = "No threads to be answered!";
         }
 
         [ObservableProperty]
@@ -52,10 +53,10 @@ namespace Gut_Instinct.Models
             //GetForum();
             if (ThreadList.Count == 0)
             {
-                DisplayText = "Loading";
-                await Task.Delay(100);
+                DisplayText = "Loading...";
+                await Task.Delay(2000);
                 GetForum();
-                DisplayText = "No questions to be answered";
+                DisplayText = "No Threads to be answered!";
             }
         }
 

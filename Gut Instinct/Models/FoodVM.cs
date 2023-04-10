@@ -61,10 +61,10 @@ namespace Gut_Instinct.Models
 
             GetFoodLibrary();
             if (FoodLibrary.Count == 0) {
-
-                LibText = "Add some foods to your library!";
-                await Task.Delay(1000);
+                LibText = "Loading...";
+                await Task.Delay(2000);
                 GetFoodLibrary();
+                LibText = "Add Some Foods!!";
             }
         }
 
@@ -100,7 +100,7 @@ namespace Gut_Instinct.Models
                 {
                     await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
                 }
-                await Shell.Current.GoToAsync("/AllFoodsPage");
+                //await Shell.Current.GoToAsync("/AllFoodsPage");
                 IsBusy = false;
             }
             else
