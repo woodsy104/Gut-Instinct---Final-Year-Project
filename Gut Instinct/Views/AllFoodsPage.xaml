@@ -25,10 +25,16 @@
             <Label x:Name="GreenCount" Grid.Column="3" Text="{Binding Path=BindingContext.GreenCount, Source={x:Reference Name = foodlib}}" TextColor="Transparent" FontSize="0.1"/>
             <CollectionView x:Name="foodLibrary" ItemsSource="{Binding FoodLibrary}"  SelectionMode="Single" SelectionChanged="foodCollection_SelectionChanged">
             
-        <CollectionView.ItemsLayout>
+            <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
             </CollectionView.ItemsLayout>
 
+            <CollectionView.EmptyView>
+                <VerticalStackLayout>
+                        <Label Text="{Binding LibText}" FontSize="Medium" TextColor="Grey"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+                
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="vm:Food">
                     <Border StrokeThickness="4" BackgroundColor="{Binding Colour, Converter={StaticResource ColourConverter}, ConverterParameter=AnyStringHere}" StrokeShape="RoundRectangle 0,30, 30, 0" Padding="16, 16">

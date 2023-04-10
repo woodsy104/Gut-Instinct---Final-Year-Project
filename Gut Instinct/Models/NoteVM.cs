@@ -19,6 +19,7 @@ namespace Gut_Instinct.Models
         public NoteVM()
         {
             noteList = new ObservableCollection<Note>();
+            EmptyNote = "No Notes Yet!";
         }
 
         [ObservableProperty]
@@ -27,13 +28,21 @@ namespace Gut_Instinct.Models
         [ObservableProperty]
         string noteEntryText;
 
+        [ObservableProperty]
+        string emptyNote;
+
         public async Task InitialiseRealm()
         {
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
             realm = Realm.GetInstance(config);
 
-            await Task.Delay(1000);
             GetNotes();
+            if (NoteList.Count == 0) {
+                EmptyNote = "Loading...";
+                await Task.Delay(1000);
+                GetNotes();
+                EmptyNote = "No Notes Yet!";
+            }
         }
 
         [RelayCommand]

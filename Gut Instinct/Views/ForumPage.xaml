@@ -12,6 +12,12 @@
     </ContentPage.ToolbarItems>
     <ScrollView>
         <CollectionView x:Name="forumLibrary" ItemsSource="{Binding ThreadList}" SelectionMode="Single" SelectionChanged="threadCollection_SelectionChanged">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout>
+                    <Label Text="{Binding DisplayText}" FontSize="Medium" TextColor="Grey"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
             </CollectionView.ItemsLayout>
