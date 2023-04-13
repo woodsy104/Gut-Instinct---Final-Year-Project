@@ -100,7 +100,6 @@ namespace Gut_Instinct.Models
                 {
                     await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
                 }
-                //await Shell.Current.GoToAsync("/AllFoodsPage");
                 IsBusy = false;
             }
             else

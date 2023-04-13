@@ -22,13 +22,11 @@ public partial class AllNotesPage : ContentPage
     {
         if (e.CurrentSelection.Count != 0)
         {
-            // Get the note model
+
             var note = (Note)e.CurrentSelection[0];
 
-            
             await DisplayAlert(note.NoteText,null, "OK");
 
-            // Unselect the UI
             notesCollection.SelectedItem = null;
         }
     }

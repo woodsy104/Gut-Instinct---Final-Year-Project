@@ -15,7 +15,6 @@ public partial class ForumPage : ContentPage
     protected override async void OnAppearing()
     {
         await vm.InitialiseRealm();
-        //vm.GetForum();
     }
 
     private async void threadCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -23,10 +22,9 @@ public partial class ForumPage : ContentPage
         if (e.CurrentSelection.Count != 0)
         {
 
-            // Get the note model
             Models.Thread thread = (Models.Thread)e.CurrentSelection[0];
 
-            //vm.SelectThread(thread);
+           
             string title = thread.Title;
             string content = thread.Content;
             await Navigation.PushAsync(new ThreadPage(title, content));

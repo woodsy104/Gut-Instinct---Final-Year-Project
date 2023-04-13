@@ -50,7 +50,6 @@ namespace Gut_Instinct.Models
             config = new PartitionSyncConfiguration($"{App.RealmApp.CurrentUser.Id}", App.RealmApp.CurrentUser);
             realm = Realm.GetInstance(config);
             
-            //GetForum();
             if (ThreadList.Count == 0)
             {
                 DisplayText = "Loading...";
@@ -154,11 +153,11 @@ namespace Gut_Instinct.Models
             realm = Realm.GetInstance(config);
             IsBusy = true;
             if (thread.Partition == App.RealmApp.CurrentUser.Id) {
-                string action = await App.Current.MainPage.DisplayActionSheet("Would you like to edit title or description?", "Cancel", null, "Name", "Title", "Description");
+                string action = await App.Current.MainPage.DisplayActionSheet("Would you like to edit the Username or description?", "Cancel", null, null,"Username", "Description");
                 switch (action)
                 {
                     case "Name":
-                        string newName = await App.Current.MainPage.DisplayPromptAsync("Edit Name", thread.Owner);
+                        string newName = await App.Current.MainPage.DisplayPromptAsync("Edit Username", thread.Owner);
 
                         if (newName is null || string.IsNullOrWhiteSpace(newName.ToString()))
                         {
@@ -171,29 +170,6 @@ namespace Gut_Instinct.Models
                             {
                                 var foundThread = realm.Find<Thread>(thread.Id);
                                 foundThread.Owner = newName.ToString();
-                            }
-                            );
-                        }
-                        catch (Exception ex)
-                        {
-                            await Application.Current.MainPage.DisplayPromptAsync("Error", ex.Message);
-                        }
-                        break;
-
-                    case "Title":
-                        string newTitle = await App.Current.MainPage.DisplayPromptAsync("Edit Title", thread.Title);
-
-                        if (newTitle is null || string.IsNullOrWhiteSpace(newTitle.ToString()))
-                        {
-                            return;
-                        }
-
-                        try
-                        {
-                            realm.Write(() =>
-                            {
-                                var foundThread = realm.Find<Thread>(thread.Id);
-                                foundThread.Title = newTitle.ToString();
                             }
                             );
                         }

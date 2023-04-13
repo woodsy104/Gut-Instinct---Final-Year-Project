@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Gut_Instinct.Helpers;
 using Realms;
 using Realms.Sync;
 using System;
@@ -91,7 +90,7 @@ namespace Gut_Instinct.Models
                         realm.Write(() =>
                         {
                             var foundApp = realm.Find<Appointment>(app.Id);
-                            foundApp.Name = GeneralHelpers.UpperCaseFirst(newText.ToString());
+                            foundApp.Name = newText.ToString();
                         }
                         );
                     }
@@ -185,7 +184,7 @@ namespace Gut_Instinct.Models
 
         [RelayCommand]
         public async void SignOut()
-        { //Move signout to the flyout menu if possible or just somewhere else
+        {
             IsBusy = true;
             try
             {
@@ -227,7 +226,7 @@ namespace Gut_Instinct.Models
                 var app =
                     new Appointment
                     {
-                        Name = GeneralHelpers.UpperCaseFirst(AppEntryText),
+                        Name = AppEntryText,
                         Partition = App.RealmApp.CurrentUser.Id,
                         Owner = App.RealmApp.CurrentUser.Profile.Email,
                         Colour = newColour,
