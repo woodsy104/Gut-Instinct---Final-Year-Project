@@ -18,7 +18,7 @@ namespace Gut_Instinct.Helpers
 
             if (value is not string latLong)
             {
-                throw new ArgumentException("value is not a string");
+                throw new ArgumentException("Value needs to be a string!");
             }
 
             return GetLocation(latLong);

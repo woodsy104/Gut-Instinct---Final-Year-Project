@@ -1,5 +1,6 @@
 using Gut_Instinct.Models;
 using Microsoft.Maui.Controls;
+using MongoDB.Bson;
 
 namespace Gut_Instinct.Views;
 

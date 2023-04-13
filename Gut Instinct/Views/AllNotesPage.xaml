@@ -23,8 +23,7 @@
                                 Margin="20"
                                 SelectionMode="Single"
                                 SelectionChanged="notesCollection_SelectionChanged">
-
-                    <!-- Designate how the collection of items are laid out -->
+                    
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
                     </CollectionView.ItemsLayout>
@@ -34,8 +33,7 @@
                             <Label Text="{Binding EmptyNote}" FontSize="Medium" TextColor="Grey"/>
                         </VerticalStackLayout>
                     </CollectionView.EmptyView>
-                    
-                    <!-- Define the appearance of each item in the list -->
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="vm:Note">
                             <StackLayout>

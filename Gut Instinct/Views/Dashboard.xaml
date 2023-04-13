@@ -11,9 +11,8 @@
     <ContentPage.Resources>
         <y:ColourConverter x:Key="ColourConverter"/>
     </ContentPage.Resources>
-    
+
     <ContentPage.ToolbarItems>
-        <!--<ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}"/>-->
         <ToolbarItem Text="Index" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
 
@@ -29,7 +28,7 @@
                     <Button Padding="20, 10" Margin="10, 0, 0, 0"  Grid.Column="2" Text="Add" Command="{Binding AddAppointmentCommand}" TextColor="{DynamicResource Secondary}" BackgroundColor="{DynamicResource Primary}" IsEnabled="{Binding IsNotBusy}"/>
                     </Grid>
                     <VerticalStackLayout>
-                        <!-- <RefreshView IsRefreshing="True" Command="{Binding GetAppointmentsCommand}">-->
+                        
                         <CollectionView ItemsSource="{Binding AppointmentList}">
                             <CollectionView.EmptyView>
                                 <VerticalStackLayout>
@@ -70,7 +69,7 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-                        <!--</RefreshView> -->
+ 
                     </VerticalStackLayout>
                 </VerticalStackLayout>
             </ScrollView>

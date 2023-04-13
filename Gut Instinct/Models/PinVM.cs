@@ -71,7 +71,6 @@ namespace Gut_Instinct.Models
                 });
                 Address = "";
                 Stars = 0;
-                //IsFree = false;
             }
             catch (Exception ex)
             {

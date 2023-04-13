@@ -15,8 +15,8 @@ namespace Gut_Instinct.Models
 
         public LoginVM()
         {
-            EmailText = "testing@testingmail.com";
-            PasswordText = "Password";
+            EmailText = "";
+            PasswordText = "";
         }
 
         [ObservableProperty]
